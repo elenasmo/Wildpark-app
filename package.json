@@ -1,0 +1,61 @@
+{
+  "name": "park-app",
+  "author": {
+    "name": "Elena Smolarek",
+    "email": "elena.smo@web.de"
+  },
+  "version": "0.1.0",
+  "proxy": "http://localhost:3333",
+  "private": true,
+  "dependencies": {
+    "cors": "2.8.5",
+    "express": "4.17.1",
+    "highlight.js": "9.15.10",
+    "markdown-it": "10.0.0",
+    "mongoose": "5.7.1",
+    "nodemon": "1.19.2",
+    "npm-run-all": "4.1.5",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "react-router-dom": "5.0.1",
+    "react-scripts": "3.1.1",
+    "styled-components": "5.0.0-beta.8",
+    "uid": "0.0.2"
+  },
+  "scripts": {
+    "start": "run-p server dev",
+    "server": "nodemon server/server.js",
+    "dev": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "storybook": "start-storybook -p 9009 -s public",
+    "build-storybook": "build-storybook -s public"
+  },
+  "babelMacros": {
+    "styledComponents": {
+      "pure": true
+    }
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@storybook/addon-actions": "5.2.1",
+    "@storybook/addon-links": "5.2.1",
+    "@storybook/addons": "5.2.1",
+    "@storybook/react": "5.2.1"
+  }
+}
