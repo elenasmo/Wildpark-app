@@ -6,14 +6,13 @@ import styled from 'styled-components/macro'
 export default function Animal({ title, picture }) {
   return (
     <AnimalStyled>
-      <img src={picture} alt="" width="100%" />
+      <img src={picture} alt={title} width="100%" />
       <h2>{title}</h2>
     </AnimalStyled>
   )
 }
 
 const AnimalStyled = styled.section`
-  position: relative;
   background: white;
   padding: 10px;
   border-radius: 5px;
