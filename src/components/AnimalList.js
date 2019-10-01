@@ -38,7 +38,12 @@ export default function AnimalList() {
       return (
         <div>
           {animals.map((animal, index) => (
-            <Animal key={index} title={animal.title} picture={animal.picture} />
+            <Animal
+              key={index}
+              title={animal.title}
+              picture={animal.picture}
+              information={animal.information}
+            />
           ))}
         </div>
       )

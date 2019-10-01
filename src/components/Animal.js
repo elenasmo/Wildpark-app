@@ -1,17 +1,26 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components/macro'
+import Information from './Information'
 
 import PropTypes from 'prop-types'
 
 Animal.propTypes = {
   title: PropTypes.string,
-  picture: PropTypes.string
+  picture: PropTypes.string,
+  information: PropTypes.string
 }
 
-export default function Animal({ title, picture }) {
+export default function Animal({ title, picture, information }) {
+  const [isInformationVisible, setIsInformationVisible] = useState(false)
+
+  function toggleInformation() {
+    setIsInformationVisible(!isInformationVisible)
+  }
+
   return (
-    <AnimalStyled>
+    <AnimalStyled onClick={toggleInformation}>
       <img src={picture} alt={title} width="100%" />
+      {isInformationVisible && <Information text={information} />}
     </AnimalStyled>
   )
 }
