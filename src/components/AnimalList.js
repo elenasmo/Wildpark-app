@@ -9,11 +9,11 @@ const animalsOdd = animals.filter((animal, index) => index % 2 !== 0)
 console.log(animalsOdd)
 
 export default function AnimalList() {
-  const [index, setIndex] = useState(0)
-  function renderArrangement(index) {
-    if (index === 0) {
+  const [gridView, setGridView] = useState(true)
+  function renderArrangement(gridView) {
+    if (gridView) {
       return (
-        <RowStyled>
+        <GridLayoutStyled>
           <ColumnStyled>
             {animalsEven.map((animal, index) => (
               <Animal
@@ -32,9 +32,9 @@ export default function AnimalList() {
               />
             ))}
           </ColumnStyled>
-        </RowStyled>
+        </GridLayoutStyled>
       )
-    } else if (index === 1) {
+    } else {
       return (
         <div>
           {animals.map((animal, index) => (
@@ -50,28 +50,32 @@ export default function AnimalList() {
     }
   }
 
-  function handleGrid() {
-    setIndex(0)
+  function showGrid() {
+    setGridView(true)
   }
 
-  function handleFullWidth() {
-    setIndex(1)
+  function showFullWidth() {
+    setGridView(false)
   }
   return (
     <>
-      <button onClick={handleGrid}>Grid</button>
-      <button onClick={handleFullWidth}>Details</button>
-      {renderArrangement(index)}
+      <button onClick={showGrid}>Grid</button>
+      <button onClick={showFullWidth}>Details</button>
+      {renderArrangement(gridView)}
     </>
   )
 }
 
-const RowStyled = styled.div`
+const GridLayoutStyled = styled.div`
   display: grid;
-  grid-template-columns: 49% 49%;
-  padding: 0 4px;
+  grid-gap: 6px;
+  grid-template-columns: 1fr 1fr;
+  padding: 6px;
 `
 
 const ColumnStyled = styled.div`
-  padding: 0 4px;
+  display: grid;
+  grid-auto-rows: min-content;
+  grid-gap: 10px;
+  /* padding: 0 4px; */
 `

@@ -16,19 +16,25 @@ export default function Animal({ title, picture, information }) {
   function toggleInformation() {
     setIsInformationVisible(!isInformationVisible)
   }
-
-  return (
-    <AnimalStyled onClick={toggleInformation}>
-      <img src={picture} alt={title} width="100%" />
-      {isInformationVisible && <Information text={information} />}
-    </AnimalStyled>
-  )
+  if (information == null) {
+    return (
+      <AnimalStyled>
+        <img src={picture} alt={title} width="100%" />
+      </AnimalStyled>
+    )
+  } else {
+    return (
+      <AnimalStyled onClick={toggleInformation}>
+        <img src={picture} alt={title} width="100%" />
+        {isInformationVisible && <Information text={information} />}
+      </AnimalStyled>
+    )
+  }
 }
-
 const AnimalStyled = styled.section`
   background: white;
 
   border-radius: 5px;
   box-shadow: 0 10px 10px #0002;
-  margin: 10px;
+  /* margin: 10px; */
 `
