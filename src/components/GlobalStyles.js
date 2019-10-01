@@ -6,7 +6,8 @@ const GlobalStyle = createGlobalStyle`
 }
 body {
     margin: 0;
-   
+    font-family: Helvetica Neue;
+    font-size:  18px; 
 }
 `
 export default GlobalStyle

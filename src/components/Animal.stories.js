@@ -1,10 +1,11 @@
 import React from 'react'
 import Animal from './Animal'
+import { withInfo } from '@storybook/addon-info'
 import schneeleopard from './img/schneeleopard.png'
 
 export default {
   title: 'Animal',
-  decorators: [Wrapper]
+  decorators: [Wrapper, withInfo]
 }
 
 function Wrapper(storyFn) {
