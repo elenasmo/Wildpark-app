@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components/macro'
 import Animal from './Animal'
 
@@ -9,6 +9,7 @@ import gänsegeier from './img/gänsegeier.png'
 import luchs from './img/luchs.png'
 import polarwolf from './img/polarwolf.png'
 import schneeleopard from './img/schneeleopard.png'
+import { H1 } from '@storybook/addon-info/dist/components/markdown'
 
 const animals = [
   { title: 'Sibirischer Tiger', picture: tiger },
@@ -33,19 +34,55 @@ const animalsOdd = animals.filter((animal, index) => index % 2 !== 0)
 console.log(animalsOdd)
 
 export default function AnimalList() {
+  const [index, setIndex] = useState(0)
+  function renderArrangement(index) {
+    if (index === 0) {
+      return (
+        <RowStyled>
+          <ColumnStyled>
+            {animalsEven.map((animal, index) => (
+              <Animal
+                key={index}
+                title={animal.title}
+                picture={animal.picture}
+              />
+            ))}
+          </ColumnStyled>
+          <ColumnStyled>
+            {animalsOdd.map((animal, index) => (
+              <Animal
+                key={index}
+                title={animal.title}
+                picture={animal.picture}
+              />
+            ))}
+          </ColumnStyled>
+        </RowStyled>
+      )
+    } else if (index === 1) {
+      return (
+        <div>
+          {animals.map((animal, index) => (
+            <Animal key={index} title={animal.title} picture={animal.picture} />
+          ))}
+        </div>
+      )
+    }
+  }
+
+  function handleGrid() {
+    setIndex(0)
+  }
+
+  function handleFullWidth() {
+    setIndex(1)
+  }
   return (
-    <RowStyled>
-      <ColumnStyled>
-        {animalsEven.map((animal, index) => (
-          <Animal key={index} title={animal.title} picture={animal.picture} />
-        ))}
-      </ColumnStyled>
-      <ColumnStyled>
-        {animalsOdd.map((animal, index) => (
-          <Animal key={index} title={animal.title} picture={animal.picture} />
-        ))}
-      </ColumnStyled>
-    </RowStyled>
+    <>
+      <button onClick={handleGrid}>Grid</button>
+      <button onClick={handleFullWidth}>Details</button>
+      {renderArrangement(index)}
+    </>
   )
 }
 
@@ -56,6 +93,5 @@ const RowStyled = styled.div`
 `
 
 const ColumnStyled = styled.div`
-    padding: 0 4px;
-    }
-  `
+  padding: 0 4px;
+`

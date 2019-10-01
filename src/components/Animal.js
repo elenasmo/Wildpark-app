@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 
 Animal.propTypes = {
   title: PropTypes.string,
-  picture: PropTypes.element
+  picture: PropTypes.string
 }
 
 export default function Animal({ title, picture }) {
