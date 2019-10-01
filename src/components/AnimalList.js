@@ -1,32 +1,7 @@
 import React, { useState } from 'react'
 import styled from 'styled-components/macro'
 import Animal from './Animal'
-
-import tiger from './img/tiger.png'
-import wollschweine from './img/wollschweine.png'
-import bear from './img/bear.png'
-import gänsegeier from './img/gänsegeier.png'
-import luchs from './img/luchs.png'
-import polarwolf from './img/polarwolf.png'
-import schneeleopard from './img/schneeleopard.png'
-import { H1 } from '@storybook/addon-info/dist/components/markdown'
-
-const animals = [
-  { title: 'Sibirischer Tiger', picture: tiger },
-  { title: 'Wollschweine', picture: wollschweine },
-  { title: 'Gänsegeier', picture: gänsegeier },
-  { title: 'Luchs', picture: luchs },
-  { title: 'Schneeleopard', picture: schneeleopard },
-  { title: 'Polarwolf', picture: polarwolf },
-  { title: 'Kamtschatkabär', picture: bear },
-  { title: 'Sibirischer Tiger', picture: tiger },
-  { title: 'Gänsegeier', picture: gänsegeier },
-  { title: 'Luchs', picture: luchs },
-  { title: 'Schneeleopard', picture: schneeleopard },
-  { title: 'Polarwolf', picture: polarwolf },
-  { title: 'Kamtschatkabär', picture: bear },
-  { title: 'Sibirischer Tiger', picture: tiger }
-]
+import { animals } from '../data/animals'
 
 const animalsEven = animals.filter((animal, index) => index % 2 === 0)
 console.log(animalsEven)
