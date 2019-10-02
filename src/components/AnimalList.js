@@ -5,14 +5,17 @@ import { animals } from '../data/animals'
 import { GridVertical } from 'styled-icons/boxicons-regular/GridVertical'
 import { ViewList } from 'styled-icons/material/ViewList'
 import { Menu } from 'styled-icons/material/Menu'
+import { Dropbox } from 'styled-icons/boxicons-logos/Dropbox'
 
-const animalsEven = animals.filter((animal, index) => index % 2 === 0)
-console.log(animalsEven)
-const animalsOdd = animals.filter((animal, index) => index % 2 !== 0)
-console.log(animalsOdd)
+const animalsSorted = animals.sort((a, b) => a.station - b.station)
+
+const animalsEven = animalsSorted.filter((animal, index) => index % 2 === 0)
+
+const animalsOdd = animalsSorted.filter((animal, index) => index % 2 !== 0)
 
 export default function AnimalList() {
   const [gridView, setGridView] = useState(true)
+  const [sort, setSort] = useState(animalsSorted)
   function renderArrangement(gridView) {
     if (gridView) {
       return (
@@ -40,11 +43,12 @@ export default function AnimalList() {
     } else {
       return (
         <div>
-          {animals.map((animal, index) => (
+          {animalsSorted.map((animal, index) => (
             <Animal
               key={index}
               title={animal.title}
               picture={animal.picture}
+              station={animal.station}
               information={animal.information}
             />
           ))}
@@ -71,9 +75,10 @@ export default function AnimalList() {
             <ViewListStyled />
           </ButtonStyled>
         </div>
-
         <MenuStyled />
       </GridStyle>
+      <button>Sortieren nach Stationen</button>
+      <button>Sortieren nach Namen</button>
       {renderArrangement(gridView)}
     </>
   )
@@ -115,3 +120,5 @@ const MenuStyled = styled(Menu)`
   height: 45px;
   color: grey;
 `
+
+const DropboxStyled = styled(Dropbox)``

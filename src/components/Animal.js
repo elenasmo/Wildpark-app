@@ -10,10 +10,11 @@ import PropTypes from 'prop-types'
 Animal.propTypes = {
   title: PropTypes.string,
   picture: PropTypes.string,
+  station: PropTypes.number,
   information: PropTypes.string
 }
 
-export default function Animal({ title, picture, information }) {
+export default function Animal({ title, picture, station, information }) {
   const [isInformationVisible, setIsInformationVisible] = useState(false)
 
   function toggleInformation() {
@@ -33,6 +34,7 @@ export default function Animal({ title, picture, information }) {
           <InfoShort>
             <h3>{title}</h3>
             <div>
+              <StationStyled>{station}</StationStyled>
               <PlaceStyled />
               <HeartStyled />
             </div>
@@ -77,4 +79,12 @@ const InfoShort = styled.section`
 const PlaceStyled = styled(Place)`
   height: 40px;
   color: plum;
+`
+const StationStyled = styled.div`
+  background-color: plum;
+  height: 40px;
+  width: 40px;
+  color: white;
+  border-radius: 50%;
+  text-align: center;
 `
