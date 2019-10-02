@@ -42,6 +42,8 @@ export default function AnimalList() {
                 key={animal.title}
                 title={animal.title}
                 picture={animal.picture}
+                onLikeClick={() => handleLike(animal)}
+                isLiked={animal.isLiked}
               />
             ))}
           </ColumnStyled>
@@ -51,6 +53,8 @@ export default function AnimalList() {
                 key={animal.title}
                 title={animal.title}
                 picture={animal.picture}
+                onLikeClick={() => handleLike(animal)}
+                isLiked={animal.isLiked}
               />
             ))}
           </ColumnStyled>
@@ -66,13 +70,23 @@ export default function AnimalList() {
               picture={animal.picture}
               station={animal.station}
               information={animal.information}
+              onLikeClick={() => handleLike(animal)}
+              isLiked={animal.isLiked}
             />
           ))}
         </FullViewStyled>
       )
     }
   }
-
+  function handleLike(animal) {
+    const index = animalList.indexOf(animal)
+    setAnimalList([
+      ...animalList.slice(0, index),
+      { ...animal, isLiked: !animal.isLiked },
+      ...animalList.slice(index + 1)
+    ])
+    console.log(animalList)
+  }
   function showGrid() {
     setGridView(true)
   }

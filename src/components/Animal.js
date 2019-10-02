@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import styled from 'styled-components/macro'
 import Information from './Information'
-import { Heart } from 'styled-icons/boxicons-regular/Heart'
+import { HeartOutline } from 'styled-icons/typicons/HeartOutline'
+import { HeartFullOutline } from 'styled-icons/typicons/HeartFullOutline'
 import { KeyboardArrowDown } from 'styled-icons/material/KeyboardArrowDown'
 import { KeyboardArrowUp } from 'styled-icons/material/KeyboardArrowUp'
 import { Place } from 'styled-icons/material/Place'
@@ -12,10 +13,18 @@ Animal.propTypes = {
   title: PropTypes.string,
   picture: PropTypes.string,
   station: PropTypes.number,
-  information: PropTypes.string
+  information: PropTypes.string,
+  isLiked: PropTypes.bool
 }
 
-export default function Animal({ title, picture, station, information }) {
+export default function Animal({
+  title,
+  picture,
+  station,
+  information,
+  onLikeClick,
+  isLiked
+}) {
   const [isInformationVisible, setIsInformationVisible] = useState(false)
   const [isArrowActive, setIsArrowActive] = useState(true)
 
@@ -39,16 +48,22 @@ export default function Animal({ title, picture, station, information }) {
             <div>
               <StationStyled>{station}</StationStyled>
               <PlaceStyled />
-              <HeartStyled />
+              <button onClick={toggleLikeButton}>
+                {!isLiked ? <HeartStyled /> : <HeartFilledStyled />}
+              </button>
             </div>
           </section>
-          <button onClick={toggleInformation} active={isArrowActive}>
+          <button onClick={toggleInformation}>
             {isArrowActive ? <ArrowDownStyled /> : <ArrowUpStyled />}
           </button>
           {isInformationVisible && <Information text={information} />}
         </AnimalStyled>
       </>
     )
+  }
+  function toggleLikeButton(event) {
+    event.stopPropagation()
+    onLikeClick()
   }
 }
 const AnimalStyled = styled.section`
@@ -63,19 +78,19 @@ const AnimalStyled = styled.section`
     justify-content: space-between;
     align-items: center;
     padding-left: 10px;
+    & > div {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+    }
   }
   & p {
     padding: 10px;
-  }
-
-  & div {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
   }
 `
 
 const TitleStyled = styled.p`
   font-size: 1.2em;
+  margin: 0;
 `
 
 const ArrowDownStyled = styled(KeyboardArrowDown)`
@@ -96,7 +111,12 @@ const ArrowUpStyled = styled(KeyboardArrowUp)`
   color: grey;
 `
 
-const HeartStyled = styled(Heart)`
+const HeartStyled = styled(HeartOutline)`
+  height: 40px;
+  color: plum;
+`
+
+const HeartFilledStyled = styled(HeartFullOutline)`
   height: 40px;
   color: plum;
 `
@@ -111,6 +131,8 @@ const StationStyled = styled.div`
   width: 40px;
   color: white;
   border-radius: 50%;
-  justify-self: center;
-  align-self: center;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
 `
