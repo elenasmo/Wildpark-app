@@ -5,65 +5,11 @@ import { animals } from '../data/animals'
 import { GridVertical } from 'styled-icons/boxicons-regular/GridVertical'
 import { ViewList } from 'styled-icons/material/ViewList'
 import { Menu } from 'styled-icons/material/Menu'
-import { Dropbox } from 'styled-icons/boxicons-logos/Dropbox'
-
-const animalsSorted = animals.sort((a, b) => a.station - b.station)
-
-const animalsEven = animalsSorted.filter((animal, index) => index % 2 === 0)
-
-const animalsOdd = animalsSorted.filter((animal, index) => index % 2 !== 0)
 
 export default function AnimalList() {
   const [gridView, setGridView] = useState(true)
-  const [sort, setSort] = useState(animalsSorted)
-  function renderArrangement(gridView) {
-    if (gridView) {
-      return (
-        <GridLayoutStyled>
-          <ColumnStyled>
-            {animalsEven.map((animal, index) => (
-              <Animal
-                key={index}
-                title={animal.title}
-                picture={animal.picture}
-              />
-            ))}
-          </ColumnStyled>
-          <ColumnStyled>
-            {animalsOdd.map((animal, index) => (
-              <Animal
-                key={index}
-                title={animal.title}
-                picture={animal.picture}
-              />
-            ))}
-          </ColumnStyled>
-        </GridLayoutStyled>
-      )
-    } else {
-      return (
-        <div>
-          {animalsSorted.map((animal, index) => (
-            <Animal
-              key={index}
-              title={animal.title}
-              picture={animal.picture}
-              station={animal.station}
-              information={animal.information}
-            />
-          ))}
-        </div>
-      )
-    }
-  }
+  const [animalList, setAnimalList] = useState(animals)
 
-  function showGrid() {
-    setGridView(true)
-  }
-
-  function showFullWidth() {
-    setGridView(false)
-  }
   return (
     <>
       <GridStyle>
@@ -77,11 +23,77 @@ export default function AnimalList() {
         </div>
         <MenuStyled />
       </GridStyle>
-      <button>Sortieren nach Stationen</button>
-      <button>Sortieren nach Namen</button>
-      {renderArrangement(gridView)}
+      <button onClick={showSortedByStation}>Sortieren nach Stationen</button>
+      <button onClick={showSortedByTitle}>Sortieren nach Namen</button>
+      {renderArrangement()}
     </>
   )
+
+  function renderArrangement() {
+    if (gridView) {
+      const animalsEven = animalList.filter((animal, index) => index % 2 === 0)
+      const animalsOdd = animalList.filter((animal, index) => index % 2 !== 0)
+
+      return (
+        <GridLayoutStyled>
+          <ColumnStyled>
+            {animalsEven.map(animal => (
+              <Animal
+                key={animal.title}
+                title={animal.title}
+                picture={animal.picture}
+              />
+            ))}
+          </ColumnStyled>
+          <ColumnStyled>
+            {animalsOdd.map(animal => (
+              <Animal
+                key={animal.title}
+                title={animal.title}
+                picture={animal.picture}
+              />
+            ))}
+          </ColumnStyled>
+        </GridLayoutStyled>
+      )
+    } else {
+      return (
+        <FullViewStyled>
+          {animalList.map(animal => (
+            <Animal
+              key={animal.title}
+              title={animal.title}
+              picture={animal.picture}
+              station={animal.station}
+              information={animal.information}
+            />
+          ))}
+        </FullViewStyled>
+      )
+    }
+  }
+
+  function showGrid() {
+    setGridView(true)
+  }
+
+  function showFullWidth() {
+    setGridView(false)
+  }
+
+  function showSortedByStation() {
+    setAnimalList(
+      animalList.sort((a, b) => a.station - b.station).map(animal => animal)
+    )
+    console.log(animalList)
+  }
+  function showSortedByTitle() {
+    setAnimalList(
+      animalList
+        .sort((a, b) => (a.title > b.title ? 1 : -1))
+        .map(animal => animal)
+    )
+  }
 }
 
 const GridLayoutStyled = styled.div`
@@ -107,6 +119,10 @@ const ButtonStyled = styled.button`
   border: none;
   background-color: white;
 `
+const FullViewStyled = styled.div`
+  display: grid;
+  grid-gap: 20px;
+`
 
 const GridVerticalStyled = styled(GridVertical)`
   height: 35px;
@@ -120,5 +136,3 @@ const MenuStyled = styled(Menu)`
   height: 45px;
   color: grey;
 `
-
-const DropboxStyled = styled(Dropbox)``
