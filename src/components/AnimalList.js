@@ -25,6 +25,8 @@ export default function AnimalList() {
       </GridStyle>
       <button onClick={showSortedByStation}>Sortieren nach Stationen</button>
       <button onClick={showSortedByTitle}>Sortieren nach Namen</button>
+      <button onClick={filterByLike}>LikeFilter</button>
+      <button onClick={showAll}>all</button>
       {renderArrangement()}
     </>
   )
@@ -107,6 +109,16 @@ export default function AnimalList() {
         .sort((a, b) => (a.title > b.title ? 1 : -1))
         .map(animal => animal)
     )
+  }
+  function filterByLike() {
+    setAnimalList(
+      animalList
+        .filter(animal => animal.isLiked === true)
+        .map((animal, title) => animal)
+    )
+  }
+  function showAll() {
+    setAnimalList(animals.map(animal => animal))
   }
 }
 
