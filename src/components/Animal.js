@@ -40,25 +40,23 @@ export default function Animal({
     )
   } else {
     return (
-      <>
-        <AnimalStyled>
-          <img src={picture} alt={title} width="100%" />
-          <section>
-            <TitleStyled>{title}</TitleStyled>
-            <div>
-              <StationStyled>{station}</StationStyled>
-              <PlaceStyled />
-              <button onClick={toggleLikeButton}>
-                {!isLiked ? <HeartStyled /> : <HeartFilledStyled />}
-              </button>
-            </div>
-          </section>
-          <button onClick={toggleInformation}>
-            {isArrowActive ? <ArrowDownStyled /> : <ArrowUpStyled />}
-          </button>
-          {isInformationVisible && <Information text={information} />}
-        </AnimalStyled>
-      </>
+      <AnimalStyled>
+        <img src={picture} alt={title} width="100%" />
+        <section>
+          <TitleStyled>{title}</TitleStyled>
+          <div>
+            <StationStyled>{station}</StationStyled>
+            <PlaceStyled />
+            <button onClick={toggleLikeButton}>
+              {isLiked ? <HeartFilledStyled /> : <HeartStyled />}
+            </button>
+          </div>
+        </section>
+        <button onClick={toggleInformation}>
+          {isArrowActive ? <ArrowDownStyled /> : <ArrowUpStyled />}
+        </button>
+        {isInformationVisible && <Information text={information} />}
+      </AnimalStyled>
     )
   }
   function toggleLikeButton(event) {
