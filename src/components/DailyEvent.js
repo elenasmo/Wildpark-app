@@ -12,7 +12,7 @@ export default function DailyEvent({
   return (
     <>
       <EventStyled>
-        <h2>{title}</h2>
+        <h3>{title}</h3>
         <img src={picture} alt={title} width="50%" />
         <p>{information}</p>
         <div>
@@ -36,10 +36,7 @@ const EventStyled = styled.section`
   justify-content: center;
   flex-direction: column;
   text-align: center;
-  > div {
-    background-color: #cfcbc0;
-    > p {
-      font-size: 14px;
-    }
+  > div > p {
+    font-size: 14px;
   }
 `

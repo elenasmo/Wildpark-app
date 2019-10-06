@@ -10,15 +10,12 @@ export default function AnimalList() {
   const [animalList, setAnimalList] = useState(animals)
 
   return (
-    <>
+    <AnimalPage>
+      <h2>Unsere Tiere</h2>
       <GridStyle>
         <div>
-          <ButtonStyled onClick={showGrid}>
-            <GridVerticalStyled />
-          </ButtonStyled>
-          <ButtonStyled onClick={showFullWidth}>
-            <ViewListStyled />
-          </ButtonStyled>
+          <GridVerticalStyled onClick={showGrid} />
+          <ViewListStyled onClick={showFullWidth} />
         </div>
       </GridStyle>
       <LabelStyled>Filtern:</LabelStyled>
@@ -41,7 +38,7 @@ export default function AnimalList() {
         <option value="none">---</option>
       </SelectStyled>
       {renderArrangement()}
-    </>
+    </AnimalPage>
   )
 
   function renderArrangement() {
@@ -155,6 +152,14 @@ export default function AnimalList() {
   }
 }
 
+const AnimalPage = styled.section`
+  padding: 10px;
+  background-color: #ededf2;
+  h2 {
+    text-align: center;
+  }
+`
+
 const GridLayoutStyled = styled.div`
   display: grid;
   grid-gap: 6px;
@@ -174,10 +179,6 @@ const GridStyle = styled.div`
   align-items: center;
 `
 
-const ButtonStyled = styled.button`
-  border: none;
-  background-color: white;
-`
 const FullViewStyled = styled.div`
   display: grid;
   grid-gap: 20px;

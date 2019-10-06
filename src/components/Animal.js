@@ -71,14 +71,15 @@ const AnimalStyled = styled.section`
   position: relative;
 
   & section {
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: 3fr 2fr;
     justify-content: space-between;
     align-items: center;
     padding-left: 10px;
     & > div {
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
+      align-items: center;
     }
   }
   & p {
@@ -111,26 +112,27 @@ const ArrowUpStyled = styled(KeyboardArrowUp)`
 
 const HeartStyled = styled(HeartOutline)`
   height: 40px;
-  color: plum;
+  color: #823d85;
 `
 
 const HeartFilledStyled = styled(HeartFullOutline)`
   height: 40px;
-  color: plum;
+  color: #823d85;
 `
 
 const PlaceStyled = styled(Place)`
   height: 40px;
-  color: plum;
+  color: #823d85;
 `
 const StationStyled = styled.div`
-  background-color: plum;
-  height: 40px;
-  width: 40px;
-  color: white;
+  height: 35px;
+  width: 35px;
+  color: #823d85;
+  font-style: bold;
   border-radius: 50%;
   display: flex;
   text-align: center;
   justify-content: center;
   align-items: center;
+  border: 3px solid #823d85;
 `

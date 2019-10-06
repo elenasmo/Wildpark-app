@@ -13,7 +13,7 @@ export default function App() {
       <Router>
         <div>
           <Burger open={open} setOpen={setOpen} />
-          <Navigation open={open} setOpen={setOpen} />
+          <Navigation open={open} handleClick={() => setOpen(!open)} />
         </div>
         <Route exact path="/" render={() => <AnimalList />} />
         <Route path="/events" render={() => <DailyEventsList />} />

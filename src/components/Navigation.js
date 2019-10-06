@@ -2,13 +2,15 @@ import React from 'react'
 import styled from 'styled-components'
 import { NavLink } from 'react-router-dom'
 
-export default function Navigation({ open }) {
+export default function Navigation({ open, handleClick }) {
   return (
     <MenuStyled className="Navigation" right width={'200px'} open={open}>
-      <NavLinkStyled exact to="/">
+      <NavLinkStyled exact to="/" onClick={handleClick}>
         Animals
       </NavLinkStyled>
-      <NavLinkStyled to="/events">Events</NavLinkStyled>
+      <NavLinkStyled to="/events" onClick={handleClick}>
+        Events
+      </NavLinkStyled>
     </MenuStyled>
   )
 }
