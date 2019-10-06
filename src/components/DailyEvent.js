@@ -37,7 +37,7 @@ const EventStyled = styled.section`
   flex-direction: column;
   text-align: center;
   > div {
-    background-color: lightgrey;
+    background-color: #cfcbc0;
     > p {
       font-size: 14px;
     }

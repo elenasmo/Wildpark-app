@@ -1,11 +1,9 @@
 import React, { useState } from 'react'
 import styled from 'styled-components/macro'
 import Animal from './Animal'
-import DailyEventsList from './DailyEventsList'
 import { animals } from '../data/animals'
 import { GridVertical } from 'styled-icons/boxicons-regular/GridVertical'
 import { ViewList } from 'styled-icons/material/ViewList'
-import { Menu } from 'styled-icons/material/Menu'
 
 export default function AnimalList() {
   const [gridView, setGridView] = useState(true)
@@ -22,7 +20,6 @@ export default function AnimalList() {
             <ViewListStyled />
           </ButtonStyled>
         </div>
-        <MenuStyled />
       </GridStyle>
       <LabelStyled>Filtern:</LabelStyled>
       <SelectStyled
@@ -94,7 +91,6 @@ export default function AnimalList() {
               />
             ))}
           </FullViewStyled>
-          <DailyEventsList />
         </>
       )
     }
@@ -195,10 +191,7 @@ const ViewListStyled = styled(ViewList)`
   height: 40px;
   color: grey;
 `
-const MenuStyled = styled(Menu)`
-  height: 45px;
-  color: grey;
-`
+
 const LabelStyled = styled.label`
   font-size: 18px;
 `
