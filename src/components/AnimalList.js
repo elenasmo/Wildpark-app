@@ -1,28 +1,22 @@
 import React, { useState } from 'react'
 import styled from 'styled-components/macro'
 import Animal from './Animal'
-import DailyEventsList from './DailyEventsList'
 import { animals } from '../data/animals'
 import { GridVertical } from 'styled-icons/boxicons-regular/GridVertical'
 import { ViewList } from 'styled-icons/material/ViewList'
-import { Menu } from 'styled-icons/material/Menu'
 
 export default function AnimalList() {
   const [gridView, setGridView] = useState(true)
   const [animalList, setAnimalList] = useState(animals)
 
   return (
-    <>
+    <AnimalPage>
+      <h2>Unsere Tiere</h2>
       <GridStyle>
         <div>
-          <ButtonStyled onClick={showGrid}>
-            <GridVerticalStyled />
-          </ButtonStyled>
-          <ButtonStyled onClick={showFullWidth}>
-            <ViewListStyled />
-          </ButtonStyled>
+          <GridVerticalStyled onClick={showGrid} />
+          <ViewListStyled onClick={showFullWidth} />
         </div>
-        <MenuStyled />
       </GridStyle>
       <LabelStyled>Filtern:</LabelStyled>
       <SelectStyled
@@ -44,7 +38,7 @@ export default function AnimalList() {
         <option value="none">---</option>
       </SelectStyled>
       {renderArrangement()}
-    </>
+    </AnimalPage>
   )
 
   function renderArrangement() {
@@ -94,7 +88,6 @@ export default function AnimalList() {
               />
             ))}
           </FullViewStyled>
-          <DailyEventsList />
         </>
       )
     }
@@ -159,6 +152,14 @@ export default function AnimalList() {
   }
 }
 
+const AnimalPage = styled.section`
+  padding: 10px;
+  background-color: #ededf2;
+  h2 {
+    text-align: center;
+  }
+`
+
 const GridLayoutStyled = styled.div`
   display: grid;
   grid-gap: 6px;
@@ -178,10 +179,6 @@ const GridStyle = styled.div`
   align-items: center;
 `
 
-const ButtonStyled = styled.button`
-  border: none;
-  background-color: white;
-`
 const FullViewStyled = styled.div`
   display: grid;
   grid-gap: 20px;
@@ -195,10 +192,7 @@ const ViewListStyled = styled(ViewList)`
   height: 40px;
   color: grey;
 `
-const MenuStyled = styled(Menu)`
-  height: 45px;
-  color: grey;
-`
+
 const LabelStyled = styled.label`
   font-size: 18px;
 `
