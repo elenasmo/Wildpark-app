@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import styled from 'styled-components/macro'
 import Animal from './Animal'
+import DailyEventsList from './DailyEventsList'
 import { animals } from '../data/animals'
 import { GridVertical } from 'styled-icons/boxicons-regular/GridVertical'
 import { ViewList } from 'styled-icons/material/ViewList'
@@ -23,10 +24,25 @@ export default function AnimalList() {
         </div>
         <MenuStyled />
       </GridStyle>
-      <button onClick={showSortedByStation}>Sortieren nach Stationen</button>
-      <button onClick={showSortedByTitle}>Sortieren nach Namen</button>
-      <button onClick={filterByLike}>LikeFilter</button>
-      <button onClick={showAll}>all</button>
+      <LabelStyled>Filtern:</LabelStyled>
+      <SelectStyled
+        name="filter"
+        onChange={handleFilterChange}
+        placeholder="select"
+      >
+        <option value="all">---</option>
+        <option value="liked">liked</option>
+      </SelectStyled>
+      <LabelStyled>Sortieren:</LabelStyled>
+      <SelectStyled
+        name="sort"
+        onChange={handleSortChange}
+        placeholder="select"
+      >
+        <option value="title">Alphabet</option>
+        <option value="station">Station</option>
+        <option value="none">---</option>
+      </SelectStyled>
       {renderArrangement()}
     </>
   )
@@ -64,19 +80,22 @@ export default function AnimalList() {
       )
     } else {
       return (
-        <FullViewStyled>
-          {animalList.map(animal => (
-            <Animal
-              key={animal.title}
-              title={animal.title}
-              picture={animal.picture}
-              station={animal.station}
-              information={animal.information}
-              onLikeClick={() => handleLike(animal)}
-              isLiked={animal.isLiked}
-            />
-          ))}
-        </FullViewStyled>
+        <>
+          <FullViewStyled>
+            {animalList.map(animal => (
+              <Animal
+                key={animal.title}
+                title={animal.title}
+                picture={animal.picture}
+                station={animal.station}
+                information={animal.information}
+                onLikeClick={() => handleLike(animal)}
+                isLiked={animal.isLiked}
+              />
+            ))}
+          </FullViewStyled>
+          <DailyEventsList />
+        </>
       )
     }
   }
@@ -87,7 +106,6 @@ export default function AnimalList() {
       { ...animal, isLiked: !animal.isLiked },
       ...animalList.slice(index + 1)
     ])
-    console.log(animalList)
   }
   function showGrid() {
     setGridView(true)
@@ -101,7 +119,6 @@ export default function AnimalList() {
     setAnimalList(
       animalList.sort((a, b) => a.station - b.station).map(animal => animal)
     )
-    console.log(animalList)
   }
   function showSortedByTitle() {
     setAnimalList(
@@ -110,6 +127,17 @@ export default function AnimalList() {
         .map(animal => animal)
     )
   }
+
+  function handleSortChange(event) {
+    if (event.target.value === 'title') {
+      showSortedByTitle()
+    } else if (event.target.value === 'station') {
+      showSortedByStation()
+    } else if (event.target.value === 'none') {
+      showAll()
+    }
+  }
+
   function filterByLike() {
     setAnimalList(
       animalList
@@ -119,6 +147,15 @@ export default function AnimalList() {
   }
   function showAll() {
     setAnimalList(animals.map(animal => animal))
+  }
+  function handleFilterChange(event) {
+    if (event.target.value === 'all') {
+      showAll()
+    } else if (event.target.value === 'liked') {
+      filterByLike()
+    } else if (event.target.value === 'none') {
+      showAll()
+    }
   }
 }
 
@@ -161,4 +198,12 @@ const ViewListStyled = styled(ViewList)`
 const MenuStyled = styled(Menu)`
   height: 45px;
   color: grey;
+`
+const LabelStyled = styled.label`
+  font-size: 18px;
+`
+const SelectStyled = styled.select`
+  > option {
+    font-size: 26px;
+  }
 `
