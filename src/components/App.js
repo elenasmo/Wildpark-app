@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import AnimalList from './AnimalList'
 import DailyEventsList from './DailyEventsList'
 import Navigation from './Navigation'
+import MapPage from './MapPage'
 import { Burger } from './Burger'
 
 import { BrowserRouter as Router, Route } from 'react-router-dom'
@@ -17,6 +18,7 @@ export default function App() {
         </div>
         <Route exact path="/" render={() => <AnimalList />} />
         <Route path="/events" render={() => <DailyEventsList />} />
+        <Route path="/map" render={() => <MapPage />} />
       </Router>
     </>
   )
