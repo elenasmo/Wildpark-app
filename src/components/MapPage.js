@@ -1,5 +1,5 @@
-import React from 'react'
-import MapOfPark from './MapOfPark'
+import React from "react"
+import MapOfPark from "./MapOfPark"
 
 export default function MapPage() {
   return (

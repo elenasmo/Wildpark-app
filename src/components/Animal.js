@@ -1,13 +1,13 @@
-import React, { useState } from 'react'
-import styled from 'styled-components/macro'
-import Information from './Information'
-import { HeartOutline } from 'styled-icons/typicons/HeartOutline'
-import { HeartFullOutline } from 'styled-icons/typicons/HeartFullOutline'
-import { KeyboardArrowDown } from 'styled-icons/material/KeyboardArrowDown'
-import { KeyboardArrowUp } from 'styled-icons/material/KeyboardArrowUp'
-import { Place } from 'styled-icons/material/Place'
+import React, { useState } from "react"
+import styled from "styled-components/macro"
+import Information from "./Information"
+import { HeartOutline } from "styled-icons/typicons/HeartOutline"
+import { HeartFullOutline } from "styled-icons/typicons/HeartFullOutline"
+import { KeyboardArrowDown } from "styled-icons/material/KeyboardArrowDown"
+import { KeyboardArrowUp } from "styled-icons/material/KeyboardArrowUp"
+import { Place } from "styled-icons/material/Place"
 
-import PropTypes from 'prop-types'
+import PropTypes from "prop-types"
 
 Animal.propTypes = {
   title: PropTypes.string,
