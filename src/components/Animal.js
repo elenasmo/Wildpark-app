@@ -116,11 +116,13 @@ const ArrowUpStyled = styled(KeyboardArrowUp)`
 const HeartStyled = styled(HeartOutline)`
   height: 40px;
   color: #823d85;
+  outline: none;
 `
 
 const HeartFilledStyled = styled(HeartFullOutline)`
   height: 40px;
   color: #823d85;
+  outline: none;
 `
 
 const PlaceStyled = styled(Place)`
