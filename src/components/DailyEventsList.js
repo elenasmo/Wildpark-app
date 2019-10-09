@@ -1,13 +1,17 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import DailyEvent from './DailyEvent'
 import styled from 'styled-components'
-import { dailyEvents } from '../data/dailyEvents'
+import { getEvents } from './services'
 
 export default function DailyEventsList() {
+  const [events, setEvents] = useState([])
+  useEffect(() => {
+    getEvents().then(setEvents)
+  }, [])
   return (
     <DailyEventsPage>
       <h2>Tägliche Vorführungen</h2>
-      {dailyEvents.map(item => (
+      {events.map(item => (
         <DailyEvent
           key={item.title}
           title={item.title}
@@ -23,8 +27,7 @@ export default function DailyEventsList() {
 }
 
 const DailyEventsPage = styled.section`
-  padding: 10px;
-  background-color: #ededf2;
+  padding: 4px;
   h2 {
     text-align: center;
   }

@@ -66,9 +66,12 @@ export default function Animal({
 }
 const AnimalStyled = styled.section`
   background: white;
-  border-radius: 5px;
   box-shadow: 0 10px 10px #0002;
+
   position: relative;
+  img {
+    vertical-align: middle;
+  }
 
   & section {
     display: grid;
@@ -113,11 +116,13 @@ const ArrowUpStyled = styled(KeyboardArrowUp)`
 const HeartStyled = styled(HeartOutline)`
   height: 40px;
   color: #823d85;
+  outline: none;
 `
 
 const HeartFilledStyled = styled(HeartFullOutline)`
   height: 40px;
   color: #823d85;
+  outline: none;
 `
 
 const PlaceStyled = styled(Place)`

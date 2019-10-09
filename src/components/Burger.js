@@ -22,7 +22,6 @@ const StyledBurger = styled.button`
   height: 2rem;
   background: transparent;
   border: none;
-  cursor: pointer;
   padding: 0;
   z-index: 12;
 
@@ -31,10 +30,10 @@ const StyledBurger = styled.button`
   }
 
   div {
-    width: 2rem;
-    height: 0.25rem;
+    width: 32px;
+    height: 5px;
     background: ${({ open }) => (open ? 'grey' : 'grey')};
-    border-radius: 10px;
+    border-radius: 2px;
     transition: all 0.3s linear;
     position: relative;
     transform-origin: 1px;

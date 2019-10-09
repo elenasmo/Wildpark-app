@@ -13,7 +13,7 @@ export default function DailyEvent({
     <>
       <EventStyled>
         <h3>{title}</h3>
-        <img src={picture} alt={title} width="50%" />
+        <img src={picture} alt={title} width="100%" />
         <p>{information}</p>
         <div>
           <p>{month}</p>
@@ -28,10 +28,10 @@ export default function DailyEvent({
 const EventStyled = styled.section`
   background: white;
   border-radius: 5px;
-  box-shadow: 0 10px 10px #0004;
+  box-shadow: 2px 10px 20px #0004;
   position: relative;
   margin: 30px;
-  padding: 20px;
+  padding: 10px;
   display: flex;
   justify-content: center;
   flex-direction: column;

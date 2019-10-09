@@ -1,0 +1,51 @@
+[
+  {
+    "title": "Braunbären",
+    "picture": "https://res.cloudinary.com/duwqflakd/image/upload/v1570540994/bear_imashg.png",
+    "station": 58,
+    "isLiked": "true",
+    "information": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+  },
+  {
+    "title": "Luchse",
+    "picture": "https://res.cloudinary.com/duwqflakd/image/upload/v1570540993/luchs_tzzwxw.png",
+    "station": 48,
+    "isLiked": "false",
+    "information": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+  },
+  {
+    "title": "Gänsegeier",
+    "picture": "https://res.cloudinary.com/duwqflakd/image/upload/v1570540993/ga%CC%88nsegeier_hnknyb.png",
+    "station": 65,
+    "isLiked": "false",
+    "information": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+  },
+  {
+    "title": "Schneeleopard",
+    "picture": "https://res.cloudinary.com/duwqflakd/image/upload/v1570540991/schneeleopard_prtlnw.png",
+    "station": 56,
+    "isLiked": "false",
+    "information": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+  },
+  {
+    "title": "Polarwölfe",
+    "picture": "https://res.cloudinary.com/duwqflakd/image/upload/v1570540991/polarwolf_hvuafm.png",
+    "station": 50,
+    "isLiked": "false",
+    "information": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+  },
+  {
+    "title": "Dammwild",
+    "picture": "https://res.cloudinary.com/duwqflakd/image/upload/v1570548546/2018_11_28_WP-0467_qqfvz3.jpg",
+    "station": 50,
+    "isLiked": "false",
+    "information": "Freilaufgehege - hier kann man füttern und die Tiere streicheln."
+  },
+  {
+    "title": "Waschbären",
+    "picture": "https://res.cloudinary.com/duwqflakd/image/upload/v1570548549/2018_11_28_WP-0533_pcu9ba.jpg",
+    "station": 50,
+    "isLiked": "false",
+    "information": "Freilaufgehege - hier kann man füttern und die Tiere streicheln."
+  }
+]

@@ -12,7 +12,6 @@ function Wrapper(storyFn) {
 }
 
 export const nav = () => {
-  const [open, setOpen] = useState(false)
   return (
     <>
       <Burger open={open} setOpen={setOpen} />

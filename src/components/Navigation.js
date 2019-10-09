@@ -22,15 +22,14 @@ const MenuStyled = styled.nav`
   display: flex;
   flex-direction: column;
   background: white;
-  transform: ${({ open }) => (open ? 'translateX(0)' : 'translateX(+100%)')};
+  right: ${({ open }) => (open ? 0 : '-300px')};
   height: 100vh;
   text-align: left;
   padding: 10px;
-  position: absolute;
+  position: fixed;
   top: 0;
-  right: 0;
   margin: 10px;
-  transition: transform 0.3s ease-in-out;
+  transition: right 0.3s ease-in-out;
   z-index: 10;
 `
 

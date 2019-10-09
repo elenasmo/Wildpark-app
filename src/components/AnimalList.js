@@ -1,13 +1,16 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components/macro'
 import Animal from './Animal'
-import { animals } from '../data/animals'
 import { GridVertical } from 'styled-icons/boxicons-regular/GridVertical'
 import { ViewList } from 'styled-icons/material/ViewList'
+import { getAnimals } from './services'
 
 export default function AnimalList() {
   const [gridView, setGridView] = useState(true)
-  const [animalList, setAnimalList] = useState(animals)
+  const [animalList, setAnimalList] = useState([])
+  useEffect(() => {
+    getAnimals().then(setAnimalList)
+  }, [])
 
   return (
     <AnimalPage>
@@ -139,7 +142,7 @@ export default function AnimalList() {
     )
   }
   function showAll() {
-    setAnimalList(animals.map(animal => animal))
+    setAnimalList(animalList.map(animal => animal))
   }
   function handleFilterChange(event) {
     if (event.target.value === 'all') {
@@ -154,7 +157,6 @@ export default function AnimalList() {
 
 const AnimalPage = styled.section`
   padding: 10px;
-  background-color: #ededf2;
   h2 {
     text-align: center;
   }
