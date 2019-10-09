@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const Animal = require('../Animal')
+const Animal = require('../models/Animal')
 
 router.get('/', (req, res) => {
   Animal.find()

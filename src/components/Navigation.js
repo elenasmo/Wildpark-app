@@ -1,10 +1,10 @@
-import React from "react"
-import styled from "styled-components"
-import { NavLink } from "react-router-dom"
+import React from 'react'
+import styled from 'styled-components'
+import { NavLink } from 'react-router-dom'
 
 export default function Navigation({ open, handleClick }) {
   return (
-    <MenuStyled className="Navigation" right width={"200px"} open={open}>
+    <MenuStyled className="Navigation" right width={'200px'} open={open}>
       <NavLinkStyled exact to="/" onClick={handleClick}>
         Animals
       </NavLinkStyled>
@@ -22,15 +22,14 @@ const MenuStyled = styled.nav`
   display: flex;
   flex-direction: column;
   background: white;
-  transform: ${({ open }) => (open ? "translateX(0)" : "translateX(+100%)")};
+  right: ${({ open }) => (open ? 0 : '-300px')};
   height: 100vh;
   text-align: left;
   padding: 10px;
-  position: absolute;
+  position: fixed;
   top: 0;
-  right: 0;
   margin: 10px;
-  transition: transform 0.3s ease-in-out;
+  transition: right 0.3s ease-in-out;
   z-index: 10;
 `
 

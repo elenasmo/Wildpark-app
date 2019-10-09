@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const DailyEvent = require('../DailyEvent')
+const DailyEvent = require('../models/DailyEvent')
 
 router.get('/', (req, res) => {
   DailyEvent.find()

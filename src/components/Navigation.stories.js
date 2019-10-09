@@ -1,18 +1,17 @@
-import React, { useState } from "react"
-import Navigation from "./Navigation"
-import { Burger } from "./Burger"
+import React, { useState } from 'react'
+import Navigation from './Navigation'
+import { Burger } from './Burger'
 
 export default {
-  title: "Navigation",
+  title: 'Navigation',
   decorators: [Wrapper]
 }
 
 function Wrapper(storyFn) {
-  return <div style={{ width: "400px" }}>{storyFn()}</div>
+  return <div style={{ width: '400px' }}>{storyFn()}</div>
 }
 
 export const nav = () => {
-  const [open, setOpen] = useState(false)
   return (
     <>
       <Burger open={open} setOpen={setOpen} />

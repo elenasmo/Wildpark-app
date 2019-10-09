@@ -27,8 +27,7 @@ export default function DailyEventsList() {
 }
 
 const DailyEventsPage = styled.section`
-  padding: 10px;
-  background-color: #ededf2;
+  padding: 4px;
   h2 {
     text-align: center;
   }
