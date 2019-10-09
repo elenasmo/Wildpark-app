@@ -11,6 +11,9 @@ export default function Navigation({ open, handleClick }) {
       <NavLinkStyled to="/events" onClick={handleClick}>
         Events
       </NavLinkStyled>
+      <NavLinkStyled to="/map" onClick={handleClick}>
+        Karte
+      </NavLinkStyled>
     </MenuStyled>
   )
 }
