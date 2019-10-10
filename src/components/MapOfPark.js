@@ -1,39 +1,34 @@
-import React from "react"
-import Map from "ol/Map"
-import View from "ol/View"
-import TileLayer from "ol/layer/Tile"
-import XYZ from "ol/source/XYZ"
-import Feature from "ol/Feature"
-import Point from "ol/geom/Point"
+import React, { useState, useEffect } from 'react'
+import Map from 'ol/Map'
+import View from 'ol/View'
+import TileLayer from 'ol/layer/Tile'
+import XYZ from 'ol/source/XYZ'
+import Feature from 'ol/Feature'
+import Point from 'ol/geom/Point'
+import { Icon, Style } from 'ol/style'
+import { fromLonLat, transform } from 'ol/proj'
+import VectorLayer from 'ol/layer/Vector'
+import { Vector } from 'ol/source'
+import styled from 'styled-components'
 
-import { Icon, Style } from "ol/style"
-import { fromLonLat } from "ol/proj"
-import VectorLayer from "ol/layer/Vector"
-import { Vector } from "ol/source"
+const animalLocations = [
+  { title: 'Wölfe', lat: 53.2369, lng: 10.04223 },
+  { title: 'Enten', lat: 53.23594, lng: 10.04088 },
+  { title: 'Tiger', lat: 53.23962, lng: 10.04934 }
+]
 
-//import BingMaps from "ol/source/BingMaps"
-
-const wildparkDestinationLonLat = [10.044297222222, 53.236686111111]
-const wildparkDestination = fromLonLat(wildparkDestinationLonLat)
-
-// const Layer = new Vector({
-//   source: new Vector({
-//     features: [
-//       new Feature({
-//         geometry: new Point(fromLonLat([4.35247, 50.84673]))
-//       })
-//     ]
-//   })
-// })
+const wildparkDestination = fromLonLat([10.044297222222, 53.236686111111])
 
 export default function MapOfPark() {
-  React.useEffect(() => {
-    new Map({
-      target: "map",
+  const [map, setMap] = useState(null)
+
+  useEffect(() => {
+    const newMap = new Map({
+      target: 'map',
       layers: [
         new TileLayer({
           source: new XYZ({
-            url: "https://{a-c}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            url: 'https://{a-c}.tile.openstreetmap.org/{z}/{x}/{y}.png'
           })
         })
       ],
@@ -43,12 +38,50 @@ export default function MapOfPark() {
         zoom: 15
       })
     })
+
+    {
+      animalLocations.forEach(animal => {
+        addPoint(newMap, animal.lat, animal.lng)
+        console.log(animal)
+      })
+    }
+    setMap(newMap)
   }, [])
-  return <div id="map" className="map"></div>
+  return (
+    <>
+      <MapWrapper id="map" className="map"></MapWrapper>
+    </>
+  )
 }
 
-// source: new BingMaps({
-//   key:
-//     "AnqTxA9moAAQ0Qo0ZiuzU1RUNTf30zW4lE2pQ-Md3eZSAJ0bqnLGOR1YOWINkyQx",
-//   imagerySet: "AerialWithLabels"
-// })
+function addPoint(map, lat, lng) {
+  let vectorLayer = new VectorLayer({
+    source: new Vector({
+      features: [
+        new Feature({
+          name: 'Test',
+          geometry: new Point(
+            transform(
+              [parseFloat(lng), parseFloat(lat)],
+              'EPSG:4326',
+              'EPSG:3857'
+            )
+          )
+        })
+      ]
+    }),
+    style: new Style({
+      image: new Icon({
+        anchor: [0.5, 46],
+        anchorXUnits: 'fraction',
+        anchorYUnits: 'pixels',
+        src: 'https://upload.wikimedia.org/wikipedia/commons/e/ec/RedDot.svg'
+      })
+    })
+  })
+  map.addLayer(vectorLayer)
+}
+
+const MapWrapper = styled.div`
+  position: relative;
+`
