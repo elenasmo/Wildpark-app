@@ -20,26 +20,27 @@ export default function AnimalList() {
           <GridVerticalStyled onClick={showGrid} />
           <ViewListStyled onClick={showFullWidth} />
         </div>
+        <LabelStyled>Filtern:</LabelStyled>
+        <SelectStyled
+          name="filter"
+          onChange={handleFilterChange}
+          placeholder="select"
+        >
+          <option value="all">---</option>
+          <option value="liked">liked</option>
+        </SelectStyled>
+        <LabelStyled>Sortieren:</LabelStyled>
+        <SelectStyled
+          name="sort"
+          onChange={handleSortChange}
+          placeholder="select"
+        >
+          <option value="title">Alphabet</option>
+          <option value="station">Station</option>
+          <option value="none">---</option>
+        </SelectStyled>
       </GridStyle>
-      <LabelStyled>Filtern:</LabelStyled>
-      <SelectStyled
-        name="filter"
-        onChange={handleFilterChange}
-        placeholder="select"
-      >
-        <option value="all">---</option>
-        <option value="liked">liked</option>
-      </SelectStyled>
-      <LabelStyled>Sortieren:</LabelStyled>
-      <SelectStyled
-        name="sort"
-        onChange={handleSortChange}
-        placeholder="select"
-      >
-        <option value="title">Alphabet</option>
-        <option value="station">Station</option>
-        <option value="none">---</option>
-      </SelectStyled>
+
       {renderArrangement()}
     </AnimalPage>
   )
@@ -142,7 +143,8 @@ export default function AnimalList() {
     )
   }
   function showAll() {
-    setAnimalList(animalList.map(animal => animal))
+    getAnimals().then(setAnimalList)
+    animalList.map(animal => animal)
   }
   function handleFilterChange(event) {
     if (event.target.value === 'all') {
