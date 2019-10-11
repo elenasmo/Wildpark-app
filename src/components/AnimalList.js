@@ -4,10 +4,13 @@ import Animal from './Animal'
 import { GridVertical } from 'styled-icons/boxicons-regular/GridVertical'
 import { ViewList } from 'styled-icons/material/ViewList'
 import { getAnimals } from './services'
+import { getAnimalsFilterAndSorted } from '../utils/animal_utils'
 
 export default function AnimalList() {
   const [gridView, setGridView] = useState(true)
   const [animalList, setAnimalList] = useState([])
+  const [filter, setFilter] = useState('all')
+  const [sortBy, setSortBy] = useState('none')
   useEffect(() => {
     getAnimals().then(setAnimalList)
   }, [])
@@ -47,8 +50,16 @@ export default function AnimalList() {
 
   function renderArrangement() {
     if (gridView) {
-      const animalsEven = animalList.filter((animal, index) => index % 2 === 0)
-      const animalsOdd = animalList.filter((animal, index) => index % 2 !== 0)
+      const animalsEven = getAnimalsFilterAndSorted(
+        animalList,
+        sortBy,
+        filter
+      ).filter((animal, index) => index % 2 === 0)
+      const animalsOdd = getAnimalsFilterAndSorted(
+        animalList,
+        sortBy,
+        filter
+      ).filter((animal, index) => index % 2 !== 0)
 
       return (
         <GridLayoutStyled>
@@ -80,22 +91,25 @@ export default function AnimalList() {
       return (
         <>
           <FullViewStyled>
-            {animalList.map(animal => (
-              <Animal
-                key={animal.title}
-                title={animal.title}
-                picture={animal.picture}
-                station={animal.station}
-                information={animal.information}
-                onLikeClick={() => handleLike(animal)}
-                isLiked={animal.isLiked}
-              />
-            ))}
+            {getAnimalsFilterAndSorted(animalList, sortBy, filter).map(
+              animal => (
+                <Animal
+                  key={animal.title}
+                  title={animal.title}
+                  picture={animal.picture}
+                  station={animal.station}
+                  information={animal.information}
+                  onLikeClick={() => handleLike(animal)}
+                  isLiked={animal.isLiked}
+                />
+              )
+            )}
           </FullViewStyled>
         </>
       )
     }
   }
+
   function handleLike(animal) {
     const index = animalList.indexOf(animal)
     setAnimalList([
@@ -112,48 +126,12 @@ export default function AnimalList() {
     setGridView(false)
   }
 
-  function showSortedByStation() {
-    setAnimalList(
-      animalList.sort((a, b) => a.station - b.station).map(animal => animal)
-    )
-  }
-  function showSortedByTitle() {
-    setAnimalList(
-      animalList
-        .sort((a, b) => (a.title > b.title ? 1 : -1))
-        .map(animal => animal)
-    )
-  }
-
   function handleSortChange(event) {
-    if (event.target.value === 'title') {
-      showSortedByTitle()
-    } else if (event.target.value === 'station') {
-      showSortedByStation()
-    } else if (event.target.value === 'none') {
-      showAll()
-    }
+    setSortBy(event.target.value)
   }
 
-  function filterByLike() {
-    setAnimalList(
-      animalList
-        .filter(animal => animal.isLiked === true)
-        .map((animal, title) => animal)
-    )
-  }
-  function showAll() {
-    getAnimals().then(setAnimalList)
-    animalList.map(animal => animal)
-  }
   function handleFilterChange(event) {
-    if (event.target.value === 'all') {
-      showAll()
-    } else if (event.target.value === 'liked') {
-      filterByLike()
-    } else if (event.target.value === 'none') {
-      showAll()
-    }
+    setFilter(event.target.value)
   }
 }
 
