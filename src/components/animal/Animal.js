@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { NavLink } from 'react-router-dom'
 import styled from 'styled-components/macro'
 import Information from './Information'
 import { HeartOutline } from 'styled-icons/typicons/HeartOutline'
@@ -46,10 +47,12 @@ export default function Animal({
           <TitleStyled>{title}</TitleStyled>
           <div>
             <StationStyled>{station}</StationStyled>
-            <PlaceStyled />
-            <HeartButton onClick={toggleLikeButton}>
+            <NavLink to="/map" onClick={showLocationInMap}>
+              <PlaceStyled />
+            </NavLink>
+            <ButtonStyled onClick={toggleLikeButton}>
               {isLiked ? <HeartFilledStyled /> : <HeartStyled />}
-            </HeartButton>
+            </ButtonStyled>
           </div>
         </section>
         <ArrowButton onClick={toggleInformation}>
@@ -62,6 +65,10 @@ export default function Animal({
   function toggleLikeButton(event) {
     event.stopPropagation()
     onLikeClick()
+  }
+  function showLocationInMap(event) {
+    event.stopPropagation()
+    console.log('place clicked')
   }
 }
 const AnimalStyled = styled.section`
@@ -100,6 +107,7 @@ const ArrowButton = styled.button`
   transform: translateX(+25px);
   bottom: 1px;
   border: none;
+  outline: none;
   background-color: transparent;
 `
 
@@ -112,7 +120,7 @@ const ArrowUpStyled = styled(KeyboardArrowUp)`
   height: 40px;
   color: grey;
 `
-const HeartButton = styled.button`
+const ButtonStyled = styled.button`
   outline: none;
   border: none;
   background-color: transparent;
@@ -144,4 +152,5 @@ const StationStyled = styled.div`
   justify-content: center;
   align-items: center;
   border: 3px solid #823d85;
+  outline: none;
 `

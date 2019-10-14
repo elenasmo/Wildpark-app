@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import DailyEvent from './DailyEvent'
 import styled from 'styled-components'
-import { getEvents } from './services'
+import { getEvents } from '../services'
 
 export default function DailyEventsList() {
   const [events, setEvents] = useState([])

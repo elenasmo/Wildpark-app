@@ -1,18 +1,24 @@
 import React, { useState } from 'react'
 import ReactMapGl, { Marker, Popup } from 'react-map-gl'
 import styled from 'styled-components'
+import Animal from '../animal/Animal'
 
 const Token = process.env.REACT_APP_MAPBOX_TOKEN
 
 const stationList = [
-  { title: 'Tiger', station: 38, latitude: 53.237498, longitude: 10.046223 },
   {
-    title: 'Wollschweine',
-    station: 58,
+    title: 'Sibirische Tiger',
+    station: 42,
     latitude: 53.237498,
     longitude: 10.046223
   },
-  { title: 'Ziegen', station: 32, latitude: 53.237595, longitude: 10.04453 }
+  {
+    title: 'Wollschweine',
+    station: 32,
+    latitude: 53.237498,
+    longitude: 10.046223
+  },
+  { title: 'Ziegen', station: 11, latitude: 53.237595, longitude: 10.04453 }
 ]
 
 export default function MapPage() {
@@ -41,7 +47,7 @@ export default function MapPage() {
             latitude={station.latitude}
             longitude={station.longitude}
           >
-            <ButtonStyled onClick={_ => showPopup(station)}>
+            <ButtonStyled onClick={() => showPopup(station)}>
               {station.station}
             </ButtonStyled>
           </Marker>

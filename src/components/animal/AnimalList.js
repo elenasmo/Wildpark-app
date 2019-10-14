@@ -3,8 +3,8 @@ import styled from 'styled-components/macro'
 import Animal from './Animal'
 import { GridVertical } from 'styled-icons/boxicons-regular/GridVertical'
 import { ViewList } from 'styled-icons/material/ViewList'
-import { getAnimals } from './services'
-import { getAnimalsFilterAndSorted } from '../utils/animal_utils'
+import { getAnimals } from '../services'
+import { getAnimalsFilterAndSorted } from '../../utils/animal_utils'
 
 export default function AnimalList() {
   const [gridView, setGridView] = useState(true)
@@ -29,8 +29,8 @@ export default function AnimalList() {
           onChange={handleFilterChange}
           placeholder="select"
         >
-          <option value="all">---</option>
-          <option value="liked">liked</option>
+          <option value="all">alle Tiere</option>
+          <option value="liked">Lieblingstiere</option>
         </SelectStyled>
         <LabelStyled>Sortieren:</LabelStyled>
         <SelectStyled
@@ -38,8 +38,8 @@ export default function AnimalList() {
           onChange={handleSortChange}
           placeholder="select"
         >
-          <option value="title">Alphabet</option>
-          <option value="station">Station</option>
+          <option value="title">alphabetisch</option>
+          <option value="station">nach Station</option>
           <option value="none">---</option>
         </SelectStyled>
       </GridStyle>
@@ -176,10 +176,10 @@ const ViewListStyled = styled(ViewList)`
 `
 
 const LabelStyled = styled.label`
-  font-size: 18px;
+  font-size: 16px;
 `
 const SelectStyled = styled.select`
   > option {
-    font-size: 26px;
+    font-size: 16px;
   }
 `

@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import AnimalList from './AnimalList'
-import DailyEventsList from './DailyEventsList'
+import AnimalList from '../animal/AnimalList'
+import DailyEventsList from '../dailyEvents/DailyEventsList'
 import Navigation from './Navigation'
-import MapPage from './MapPage'
+import MapPage from '../map/MapPage'
 import { Burger } from './Burger'
 
 import { BrowserRouter as Router, Route } from 'react-router-dom'

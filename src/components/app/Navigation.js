@@ -23,7 +23,7 @@ const MenuStyled = styled.nav`
   flex-direction: column;
   background: white;
   right: ${({ open }) => (open ? 0 : '-300px')};
-  height: 100vh;
+  height: 50vh;
   text-align: left;
   padding: 10px;
   position: fixed;
