@@ -1,19 +1,15 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components/macro'
 import Animal from './Animal'
 import { GridVertical } from 'styled-icons/boxicons-regular/GridVertical'
 import { ViewList } from 'styled-icons/material/ViewList'
-import { getAnimals } from '../services'
 import { getAnimalsFilterAndSorted } from '../../utils/animal_utils'
 
-export default function AnimalList() {
+export default function AnimalList({ onHandleLike, animalList }) {
   const [gridView, setGridView] = useState(true)
-  const [animalList, setAnimalList] = useState([])
+
   const [filter, setFilter] = useState('all')
   const [sortBy, setSortBy] = useState('none')
-  useEffect(() => {
-    getAnimals().then(setAnimalList)
-  }, [])
 
   return (
     <AnimalPage>
@@ -69,7 +65,7 @@ export default function AnimalList() {
                 key={animal.title}
                 title={animal.title}
                 picture={animal.picture}
-                onLikeClick={() => handleLike(animal)}
+                onLikeClick={onHandleLike}
                 isLiked={animal.isLiked}
               />
             ))}
@@ -80,7 +76,7 @@ export default function AnimalList() {
                 key={animal.title}
                 title={animal.title}
                 picture={animal.picture}
-                onLikeClick={() => handleLike(animal)}
+                onLikeClick={onHandleLike}
                 isLiked={animal.isLiked}
               />
             ))}
@@ -99,7 +95,7 @@ export default function AnimalList() {
                   picture={animal.picture}
                   station={animal.station}
                   information={animal.information}
-                  onLikeClick={() => handleLike(animal)}
+                  onLikeClick={onHandleLike}
                   isLiked={animal.isLiked}
                 />
               )
@@ -108,15 +104,6 @@ export default function AnimalList() {
         </>
       )
     }
-  }
-
-  function handleLike(animal) {
-    const index = animalList.indexOf(animal)
-    setAnimalList([
-      ...animalList.slice(0, index),
-      { ...animal, isLiked: !animal.isLiked },
-      ...animalList.slice(index + 1)
-    ])
   }
   function showGrid() {
     setGridView(true)

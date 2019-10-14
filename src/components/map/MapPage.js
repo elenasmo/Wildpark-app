@@ -1,27 +1,10 @@
 import React, { useState } from 'react'
 import ReactMapGl, { Marker, Popup } from 'react-map-gl'
 import styled from 'styled-components'
-import Animal from '../animal/Animal'
 
-const Token = process.env.REACT_APP_MAPBOX_TOKEN
+const token = process.env.REACT_APP_MAPBOX_TOKEN
 
-const stationList = [
-  {
-    title: 'Sibirische Tiger',
-    station: 42,
-    latitude: 53.237498,
-    longitude: 10.046223
-  },
-  {
-    title: 'Wollschweine',
-    station: 32,
-    latitude: 53.237498,
-    longitude: 10.046223
-  },
-  { title: 'Ziegen', station: 11, latitude: 53.237595, longitude: 10.04453 }
-]
-
-export default function MapPage() {
+export default function MapPage({ animalList }) {
   const [isPopupVisible, setIsPopupVisible] = useState(false)
   const [activeStation, setActiveStation] = useState(null)
 
@@ -32,20 +15,22 @@ export default function MapPage() {
     height: '80vh',
     zoom: 16
   })
+
   return (
     <>
       <h2>Parkplan</h2>
+
       <ReactMapGl
         {...viewport}
-        mapboxApiAccessToken={Token}
+        mapboxApiAccessToken={token}
         mapStyle="mapbox://styles/mapbox/satellite-v9"
         onViewportChange={viewport => setViewport(viewport)}
       >
-        {stationList.map(station => (
+        {animalList.map(station => (
           <Marker
             key={station.station}
-            latitude={station.latitude}
-            longitude={station.longitude}
+            latitude={parseFloat(station.latitude)}
+            longitude={parseFloat(station.longitude)}
           >
             <ButtonStyled onClick={() => showPopup(station)}>
               {station.station}
@@ -61,8 +46,8 @@ export default function MapPage() {
     if (isPopupVisible && activeStation) {
       return (
         <Popup
-          latitude={activeStation.latitude}
-          longitude={activeStation.longitude}
+          latitude={parseFloat(activeStation.latitude)}
+          longitude={parseFloat(activeStation.longitude)}
         >
           <div>{activeStation.title}</div>
         </Popup>
