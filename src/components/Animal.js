@@ -47,14 +47,14 @@ export default function Animal({
           <div>
             <StationStyled>{station}</StationStyled>
             <PlaceStyled />
-            <button onClick={toggleLikeButton}>
+            <HeartButton onClick={toggleLikeButton}>
               {isLiked ? <HeartFilledStyled /> : <HeartStyled />}
-            </button>
+            </HeartButton>
           </div>
         </section>
-        <button onClick={toggleInformation}>
+        <ArrowButton onClick={toggleInformation}>
           {isArrowActive ? <ArrowDownStyled /> : <ArrowUpStyled />}
-        </button>
+        </ArrowButton>
         {isInformationVisible && <Information text={information} />}
       </AnimalStyled>
     )
@@ -73,19 +73,19 @@ const AnimalStyled = styled.section`
     vertical-align: middle;
   }
 
-  & section {
+  section {
     display: grid;
     grid-template-columns: 3fr 2fr;
     justify-content: space-between;
     align-items: center;
     padding-left: 10px;
-    & > div {
+    > div {
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
       align-items: center;
     }
   }
-  & p {
+  p {
     padding: 10px;
   }
 `
@@ -94,23 +94,28 @@ const TitleStyled = styled.p`
   font-size: 1.2em;
   margin: 0;
 `
-
-const ArrowDownStyled = styled(KeyboardArrowDown)`
-  height: 40px;
+const ArrowButton = styled.button`
   position: absolute;
   right: 50%;
   transform: translateX(+25px);
   bottom: 1px;
+  border: none;
+  background-color: transparent;
+`
+
+const ArrowDownStyled = styled(KeyboardArrowDown)`
+  height: 40px;
   color: grey;
 `
 
 const ArrowUpStyled = styled(KeyboardArrowUp)`
   height: 40px;
-  position: absolute;
-  right: 50%;
-  transform: translateX(+25px);
-  bottom: 1px;
   color: grey;
+`
+const HeartButton = styled.button`
+  outline: none;
+  border: none;
+  background-color: transparent;
 `
 
 const HeartStyled = styled(HeartOutline)`
@@ -122,7 +127,6 @@ const HeartStyled = styled(HeartOutline)`
 const HeartFilledStyled = styled(HeartFullOutline)`
   height: 40px;
   color: #823d85;
-  outline: none;
 `
 
 const PlaceStyled = styled(Place)`
