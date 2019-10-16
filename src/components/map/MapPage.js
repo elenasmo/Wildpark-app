@@ -2,23 +2,11 @@ import React, { useState } from 'react'
 import ReactMapGl, { Marker, Popup } from 'react-map-gl'
 import styled from 'styled-components'
 
-const Token = process.env.REACT_APP_MAPBOX_TOKEN
+const token = process.env.REACT_APP_MAPBOX_TOKEN
 
-const stationList = [
-  { title: 'Tiger', station: 38, latitude: 53.237498, longitude: 10.046223 },
-  {
-    title: 'Wollschweine',
-    station: 58,
-    latitude: 53.237498,
-    longitude: 10.046223
-  },
-  { title: 'Ziegen', station: 32, latitude: 53.237595, longitude: 10.04453 }
-]
-
-export default function MapPage() {
-  const [isPopupVisible, setIsPopupVisible] = useState(false)
-  const [activeStation, setActiveStation] = useState(null)
-
+export default function MapPage({ animalList, initAnimal }) {
+  const [activeAnimal, setActiveAnimal] = useState(initAnimal)
+  const [isPopupVisible, setIsPopupVisible] = useState(initAnimal != null)
   const [viewport, setViewport] = useState({
     latitude: 53.23756,
     longitude: 10.044543,
@@ -26,23 +14,25 @@ export default function MapPage() {
     height: '80vh',
     zoom: 16
   })
+
   return (
     <>
       <h2>Parkplan</h2>
+
       <ReactMapGl
         {...viewport}
-        mapboxApiAccessToken={Token}
+        mapboxApiAccessToken={token}
         mapStyle="mapbox://styles/mapbox/satellite-v9"
         onViewportChange={viewport => setViewport(viewport)}
       >
-        {stationList.map(station => (
+        {animalList.map(animal => (
           <Marker
-            key={station.station}
-            latitude={station.latitude}
-            longitude={station.longitude}
+            key={animal.station}
+            latitude={parseFloat(animal.latitude)}
+            longitude={parseFloat(animal.longitude)}
           >
-            <ButtonStyled onClick={_ => showPopup(station)}>
-              {station.station}
+            <ButtonStyled onClick={() => showPopup(animal)}>
+              {animal.station}
             </ButtonStyled>
           </Marker>
         ))}
@@ -52,20 +42,20 @@ export default function MapPage() {
   )
 
   function renderPopup() {
-    if (isPopupVisible && activeStation) {
+    if (isPopupVisible && activeAnimal) {
       return (
         <Popup
-          latitude={activeStation.latitude}
-          longitude={activeStation.longitude}
+          latitude={parseFloat(activeAnimal.latitude)}
+          longitude={parseFloat(activeAnimal.longitude)}
         >
-          <div>{activeStation.title}</div>
+          <div>{activeAnimal.title}</div>
         </Popup>
       )
     }
   }
-  function showPopup(station) {
-    setActiveStation(station)
-    activeStation === station
+  function showPopup(animal) {
+    setActiveAnimal(animal)
+    activeAnimal === animal
       ? setIsPopupVisible(!isPopupVisible)
       : setIsPopupVisible(true)
   }

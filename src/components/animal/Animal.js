@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components/macro'
 import Information from './Information'
 import { HeartOutline } from 'styled-icons/typicons/HeartOutline'
@@ -22,8 +23,11 @@ export default function Animal({
   picture,
   station,
   information,
+  latitude,
+  longitude,
   onLikeClick,
-  isLiked
+  isLiked,
+  initAnimal
 }) {
   const [isInformationVisible, setIsInformationVisible] = useState(false)
   const [isArrowActive, setIsArrowActive] = useState(true)
@@ -46,10 +50,17 @@ export default function Animal({
           <TitleStyled>{title}</TitleStyled>
           <div>
             <StationStyled>{station}</StationStyled>
-            <PlaceStyled />
-            <HeartButton onClick={toggleLikeButton}>
+            <Link
+              to={{
+                pathname: '/map',
+                initAnimal: { title, station, latitude, longitude }
+              }}
+            >
+              <PlaceStyled />
+            </Link>
+            <ButtonStyled onClick={toggleLikeButton}>
               {isLiked ? <HeartFilledStyled /> : <HeartStyled />}
-            </HeartButton>
+            </ButtonStyled>
           </div>
         </section>
         <ArrowButton onClick={toggleInformation}>
@@ -100,6 +111,7 @@ const ArrowButton = styled.button`
   transform: translateX(+25px);
   bottom: 1px;
   border: none;
+  outline: none;
   background-color: transparent;
 `
 
@@ -112,7 +124,7 @@ const ArrowUpStyled = styled(KeyboardArrowUp)`
   height: 40px;
   color: grey;
 `
-const HeartButton = styled.button`
+const ButtonStyled = styled.button`
   outline: none;
   border: none;
   background-color: transparent;
@@ -144,4 +156,5 @@ const StationStyled = styled.div`
   justify-content: center;
   align-items: center;
   border: 3px solid #823d85;
+  outline: none;
 `

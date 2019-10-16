@@ -1,27 +1,23 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components/macro'
 import Animal from './Animal'
 import { GridVertical } from 'styled-icons/boxicons-regular/GridVertical'
 import { ViewList } from 'styled-icons/material/ViewList'
-import { getAnimals } from './services'
-import { getAnimalsFilterAndSorted } from '../utils/animal_utils'
+import { getAnimalsFilterAndSorted } from '../../utils/animal_utils'
 
-export default function AnimalList() {
-  const [gridView, setGridView] = useState(true)
-  const [animalList, setAnimalList] = useState([])
+export default function AnimalList({ onHandleLike, animalList }) {
+  const [gridView, setGridView] = useState(false)
+
   const [filter, setFilter] = useState('all')
   const [sortBy, setSortBy] = useState('none')
-  useEffect(() => {
-    getAnimals().then(setAnimalList)
-  }, [])
 
   return (
     <AnimalPage>
       <h2>Unsere Tiere</h2>
       <GridStyle>
         <div>
-          <GridVerticalStyled onClick={showGrid} />
           <ViewListStyled onClick={showFullWidth} />
+          <GridVerticalStyled onClick={showGrid} />
         </div>
         <LabelStyled>Filtern:</LabelStyled>
         <SelectStyled
@@ -29,8 +25,8 @@ export default function AnimalList() {
           onChange={handleFilterChange}
           placeholder="select"
         >
-          <option value="all">---</option>
-          <option value="liked">liked</option>
+          <option value="all">alle Tiere</option>
+          <option value="liked">Lieblingstiere</option>
         </SelectStyled>
         <LabelStyled>Sortieren:</LabelStyled>
         <SelectStyled
@@ -38,8 +34,8 @@ export default function AnimalList() {
           onChange={handleSortChange}
           placeholder="select"
         >
-          <option value="title">Alphabet</option>
-          <option value="station">Station</option>
+          <option value="title">alphabetisch</option>
+          <option value="station">nach Station</option>
           <option value="none">---</option>
         </SelectStyled>
       </GridStyle>
@@ -69,7 +65,7 @@ export default function AnimalList() {
                 key={animal.title}
                 title={animal.title}
                 picture={animal.picture}
-                onLikeClick={() => handleLike(animal)}
+                onLikeClick={onHandleLike}
                 isLiked={animal.isLiked}
               />
             ))}
@@ -80,7 +76,7 @@ export default function AnimalList() {
                 key={animal.title}
                 title={animal.title}
                 picture={animal.picture}
-                onLikeClick={() => handleLike(animal)}
+                onLikeClick={onHandleLike}
                 isLiked={animal.isLiked}
               />
             ))}
@@ -99,8 +95,10 @@ export default function AnimalList() {
                   picture={animal.picture}
                   station={animal.station}
                   information={animal.information}
-                  onLikeClick={() => handleLike(animal)}
+                  onLikeClick={onHandleLike}
                   isLiked={animal.isLiked}
+                  latitude={animal.latitude}
+                  longitude={animal.longitude}
                 />
               )
             )}
@@ -108,15 +106,6 @@ export default function AnimalList() {
         </>
       )
     }
-  }
-
-  function handleLike(animal) {
-    const index = animalList.indexOf(animal)
-    setAnimalList([
-      ...animalList.slice(0, index),
-      { ...animal, isLiked: !animal.isLiked },
-      ...animalList.slice(index + 1)
-    ])
   }
   function showGrid() {
     setGridView(true)
@@ -176,10 +165,10 @@ const ViewListStyled = styled(ViewList)`
 `
 
 const LabelStyled = styled.label`
-  font-size: 18px;
+  font-size: 16px;
 `
 const SelectStyled = styled.select`
   > option {
-    font-size: 26px;
+    font-size: 16px;
   }
 `
