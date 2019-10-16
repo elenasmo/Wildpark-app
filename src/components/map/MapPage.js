@@ -59,12 +59,6 @@ export default function MapPage({ animalList, initAnimal }) {
       ? setIsPopupVisible(!isPopupVisible)
       : setIsPopupVisible(true)
   }
-  // function showLocationInMap(animal) {
-  //   setActiveAnimal(animal)
-  //   activeAnimal === animal
-  //     ? setIsPopupVisible(!isPopupVisible)
-  //     : setIsPopupVisible(true)
-  // }
 }
 
 const ButtonStyled = styled.button`

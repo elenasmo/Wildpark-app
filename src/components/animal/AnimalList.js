@@ -6,7 +6,7 @@ import { ViewList } from 'styled-icons/material/ViewList'
 import { getAnimalsFilterAndSorted } from '../../utils/animal_utils'
 
 export default function AnimalList({ onHandleLike, animalList }) {
-  const [gridView, setGridView] = useState(true)
+  const [gridView, setGridView] = useState(false)
 
   const [filter, setFilter] = useState('all')
   const [sortBy, setSortBy] = useState('none')
@@ -16,8 +16,8 @@ export default function AnimalList({ onHandleLike, animalList }) {
       <h2>Unsere Tiere</h2>
       <GridStyle>
         <div>
-          <GridVerticalStyled onClick={showGrid} />
           <ViewListStyled onClick={showFullWidth} />
+          <GridVerticalStyled onClick={showGrid} />
         </div>
         <LabelStyled>Filtern:</LabelStyled>
         <SelectStyled
