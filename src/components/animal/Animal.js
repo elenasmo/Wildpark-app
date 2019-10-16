@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { NavLink } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components/macro'
 import Information from './Information'
 import { HeartOutline } from 'styled-icons/typicons/HeartOutline'
@@ -23,8 +23,11 @@ export default function Animal({
   picture,
   station,
   information,
+  latitude,
+  longitude,
   onLikeClick,
-  isLiked
+  isLiked,
+  initAnimal
 }) {
   const [isInformationVisible, setIsInformationVisible] = useState(false)
   const [isArrowActive, setIsArrowActive] = useState(true)
@@ -47,9 +50,14 @@ export default function Animal({
           <TitleStyled>{title}</TitleStyled>
           <div>
             <StationStyled>{station}</StationStyled>
-            <NavLink to="/map" onClick={showLocationInMap}>
+            <Link
+              to={{
+                pathname: '/map',
+                initAnimal: { title, station, latitude, longitude }
+              }}
+            >
               <PlaceStyled />
-            </NavLink>
+            </Link>
             <ButtonStyled onClick={toggleLikeButton}>
               {isLiked ? <HeartFilledStyled /> : <HeartStyled />}
             </ButtonStyled>
@@ -65,10 +73,6 @@ export default function Animal({
   function toggleLikeButton(event) {
     event.stopPropagation()
     onLikeClick()
-  }
-  function showLocationInMap(event) {
-    event.stopPropagation()
-    console.log('place clicked')
   }
 }
 const AnimalStyled = styled.section`

@@ -4,10 +4,9 @@ import styled from 'styled-components'
 
 const token = process.env.REACT_APP_MAPBOX_TOKEN
 
-export default function MapPage({ animalList }) {
-  const [isPopupVisible, setIsPopupVisible] = useState(false)
-  const [activeStation, setActiveStation] = useState(null)
-
+export default function MapPage({ animalList, initAnimal }) {
+  const [activeAnimal, setActiveAnimal] = useState(initAnimal)
+  const [isPopupVisible, setIsPopupVisible] = useState(initAnimal != null)
   const [viewport, setViewport] = useState({
     latitude: 53.23756,
     longitude: 10.044543,
@@ -26,14 +25,14 @@ export default function MapPage({ animalList }) {
         mapStyle="mapbox://styles/mapbox/satellite-v9"
         onViewportChange={viewport => setViewport(viewport)}
       >
-        {animalList.map(station => (
+        {animalList.map(animal => (
           <Marker
-            key={station.station}
-            latitude={parseFloat(station.latitude)}
-            longitude={parseFloat(station.longitude)}
+            key={animal.station}
+            latitude={parseFloat(animal.latitude)}
+            longitude={parseFloat(animal.longitude)}
           >
-            <ButtonStyled onClick={() => showPopup(station)}>
-              {station.station}
+            <ButtonStyled onClick={() => showPopup(animal)}>
+              {animal.station}
             </ButtonStyled>
           </Marker>
         ))}
@@ -43,23 +42,29 @@ export default function MapPage({ animalList }) {
   )
 
   function renderPopup() {
-    if (isPopupVisible && activeStation) {
+    if (isPopupVisible && activeAnimal) {
       return (
         <Popup
-          latitude={parseFloat(activeStation.latitude)}
-          longitude={parseFloat(activeStation.longitude)}
+          latitude={parseFloat(activeAnimal.latitude)}
+          longitude={parseFloat(activeAnimal.longitude)}
         >
-          <div>{activeStation.title}</div>
+          <div>{activeAnimal.title}</div>
         </Popup>
       )
     }
   }
-  function showPopup(station) {
-    setActiveStation(station)
-    activeStation === station
+  function showPopup(animal) {
+    setActiveAnimal(animal)
+    activeAnimal === animal
       ? setIsPopupVisible(!isPopupVisible)
       : setIsPopupVisible(true)
   }
+  // function showLocationInMap(animal) {
+  //   setActiveAnimal(animal)
+  //   activeAnimal === animal
+  //     ? setIsPopupVisible(!isPopupVisible)
+  //     : setIsPopupVisible(true)
+  // }
 }
 
 const ButtonStyled = styled.button`

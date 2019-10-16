@@ -29,7 +29,13 @@ export default function App() {
           )}
         />
         <Route path="/events" render={() => <DailyEventsList />} />
-        <Route path="/map" render={() => <MapPage animalList={animalList} />} />
+        <Route
+          path="/map"
+          render={props => {
+            console.log('ROUTE', props)
+            return <MapPage {...props.location} animalList={animalList} />
+          }}
+        />
       </Router>
     </>
   )

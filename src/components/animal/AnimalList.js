@@ -97,6 +97,8 @@ export default function AnimalList({ onHandleLike, animalList }) {
                   information={animal.information}
                   onLikeClick={onHandleLike}
                   isLiked={animal.isLiked}
+                  latitude={animal.latitude}
+                  longitude={animal.longitude}
                 />
               )
             )}
