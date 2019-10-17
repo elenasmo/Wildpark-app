@@ -8,7 +8,6 @@ import { getAnimalsFilterAndSorted } from '../../utils/animal_utils'
 
 export default function AnimalList({ onHandleLike, animalList, pageTitle }) {
   const [gridView, setGridView] = useState(false)
-
   const [filter, setFilter] = useState('all')
   const [sortBy, setSortBy] = useState('none')
 
@@ -17,28 +16,36 @@ export default function AnimalList({ onHandleLike, animalList, pageTitle }) {
       <AnimalPage>
         <GridStyle>
           <div>
-            <ViewListStyled onClick={showFullWidth} />
-            <GridVerticalStyled onClick={showGrid} />
+            <ToggleButtonLeft>
+              <ViewListStyled onClick={showFullWidth} />
+            </ToggleButtonLeft>
+            <ToggleButtonRight>
+              <GridVerticalStyled onClick={showGrid} />
+            </ToggleButtonRight>
           </div>
-          <LabelStyled>Filtern:</LabelStyled>
-          <SelectStyled
-            name="filter"
-            onChange={handleFilterChange}
-            placeholder="select"
-          >
-            <option value="all">alle Tiere</option>
-            <option value="liked">Lieblingstiere</option>
-          </SelectStyled>
-          <LabelStyled>Sortieren:</LabelStyled>
-          <SelectStyled
-            name="sort"
-            onChange={handleSortChange}
-            placeholder="select"
-          >
-            <option value="title">alphabetisch</option>
-            <option value="station">nach Station</option>
-            <option value="none">---</option>
-          </SelectStyled>
+          <div>
+            <LabelStyled>Filtern:</LabelStyled>
+            <SelectStyled
+              name="filter"
+              onChange={handleFilterChange}
+              placeholder="select"
+            >
+              <option value="all">alle Tiere</option>
+              <option value="liked">Lieblingstiere</option>
+            </SelectStyled>
+          </div>
+          <div>
+            <LabelStyled>Sortieren:</LabelStyled>
+            <SelectStyled
+              name="sort"
+              onChange={handleSortChange}
+              placeholder="select"
+            >
+              <option value="title">alphabetisch</option>
+              <option value="station">nach Station</option>
+              <option value="none">---</option>
+            </SelectStyled>
+          </div>
         </GridStyle>
 
         {renderArrangement()}
@@ -67,7 +74,7 @@ export default function AnimalList({ onHandleLike, animalList, pageTitle }) {
                 key={animal.title}
                 title={animal.title}
                 picture={animal.picture}
-                onLikeClick={onHandleLike}
+                onLikeClick={_ => onHandleLike(animal)}
                 isLiked={animal.isLiked}
               />
             ))}
@@ -78,7 +85,7 @@ export default function AnimalList({ onHandleLike, animalList, pageTitle }) {
                 key={animal.title}
                 title={animal.title}
                 picture={animal.picture}
-                onLikeClick={onHandleLike}
+                onLikeClick={_ => onHandleLike(animal)}
                 isLiked={animal.isLiked}
               />
             ))}
@@ -97,7 +104,7 @@ export default function AnimalList({ onHandleLike, animalList, pageTitle }) {
                   picture={animal.picture}
                   station={animal.station}
                   information={animal.information}
-                  onLikeClick={onHandleLike}
+                  onLikeClick={_ => onHandleLike(animal)}
                   isLiked={animal.isLiked}
                   latitude={animal.latitude}
                   longitude={animal.longitude}
@@ -147,10 +154,8 @@ const ColumnStyled = styled.div`
   grid-gap: 10px;
 `
 const GridStyle = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
 `
 
 const FullViewStyled = styled.div`
@@ -159,11 +164,12 @@ const FullViewStyled = styled.div`
 `
 
 const GridVerticalStyled = styled(GridVertical)`
-  height: 35px;
+  height: 25px;
   color: grey;
+  margin: 3px;
 `
 const ViewListStyled = styled(ViewList)`
-  height: 40px;
+  height: 31px;
   color: grey;
 `
 
@@ -174,4 +180,14 @@ const SelectStyled = styled.select`
   > option {
     font-size: 16px;
   }
+`
+const ToggleButtonLeft = styled.button`
+  background-color: white;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+`
+const ToggleButtonRight = styled.button`
+  background-color: white;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
 `

@@ -34,12 +34,11 @@ export default function App() {
         />
         <Route
           path="/events"
-          render={() => <DailyEventsList pageTitle={'Tägliche Vorführungen'} />}
+          render={() => <DailyEventsList pageTitle={'Vorführungen'} />}
         />
         <Route
           path="/map"
           render={props => {
-            console.log('ROUTE', props)
             return (
               <MapPage
                 {...props.location}

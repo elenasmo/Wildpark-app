@@ -6,13 +6,13 @@ export default function Navigation({ open, handleClick }) {
   return (
     <MenuStyled className="Navigation" right width={'200px'} open={open}>
       <NavLinkStyled exact to="/" onClick={handleClick}>
-        Animals
+        Unsere Tiere
       </NavLinkStyled>
       <NavLinkStyled to="/events" onClick={handleClick}>
-        Events
+        Vorführungen
       </NavLinkStyled>
       <NavLinkStyled to="/map" onClick={handleClick}>
-        Karte
+        Parkplan
       </NavLinkStyled>
     </MenuStyled>
   )
@@ -21,13 +21,13 @@ export default function Navigation({ open, handleClick }) {
 const MenuStyled = styled.nav`
   display: flex;
   flex-direction: column;
-  background: white;
+  background: whitesmoke;
   right: ${({ open }) => (open ? 0 : '-300px')};
-  height: 50vh;
+  height: 100vh;
   text-align: left;
   padding: 10px;
   position: fixed;
-  top: 0;
+  top: 40px;
   margin: 10px;
   transition: right 0.3s ease-in-out;
   z-index: 10;
@@ -36,7 +36,7 @@ const MenuStyled = styled.nav`
 const NavLinkStyled = styled(NavLink)`
   font-size: 1.2rem;
   padding: 15px;
-  color: black;
+  color: #467335;
   text-decoration: none;
   transition: color 0.3s linear;
 `

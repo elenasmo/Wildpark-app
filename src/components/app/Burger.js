@@ -32,7 +32,7 @@ const StyledBurger = styled.button`
   div {
     width: 32px;
     height: 5px;
-    background: ${({ open }) => (open ? 'grey' : 'grey')};
+    background: #ddfadd;
     border-radius: 2px;
     transition: all 0.3s linear;
     position: relative;

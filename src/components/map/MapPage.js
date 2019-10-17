@@ -72,9 +72,11 @@ export default function MapPage({ animalList, initAnimal, pageTitle }) {
                   {animal.station}
                 </ButtonStyled>
               ) : (
-                <button onClick={() => showPopup(animal)}>
-                  <IconStyled src={animal.icon} alt={animal.title} />
-                </button>
+                <IconStyled
+                  src={animal.icon}
+                  alt={animal.title}
+                  onClick={() => showPopup(animal)}
+                />
               )}
             </Marker>
           ))}
@@ -134,6 +136,12 @@ const FilterStyled = styled.div`
   flex-direction: row;
   justify-content: center;
   text-align: center;
+  margin: 15px;
+  > button {
+    background-color: lightgrey;
+    margin: 5px;
+    padding: 2px;
+  }
 `
 const RestaurantStyled = styled(Restaurant)`
   height: 30px;
