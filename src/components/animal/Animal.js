@@ -25,9 +25,9 @@ export default function Animal({
   information,
   latitude,
   longitude,
+  icon,
   onLikeClick,
-  isLiked,
-  initAnimal
+  isLiked
 }) {
   const [isInformationVisible, setIsInformationVisible] = useState(false)
   const [isArrowActive, setIsArrowActive] = useState(true)
@@ -49,11 +49,11 @@ export default function Animal({
         <section>
           <TitleStyled>{title}</TitleStyled>
           <div>
-            <StationStyled>{station}</StationStyled>
+            {/* <StationStyled>{station}</StationStyled> */}
             <Link
               to={{
                 pathname: '/map',
-                initAnimal: { title, station, latitude, longitude }
+                initAnimal: { title, station, latitude, longitude, icon }
               }}
             >
               <PlaceStyled />

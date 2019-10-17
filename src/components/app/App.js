@@ -25,7 +25,11 @@ export default function App() {
           exact
           path="/"
           render={() => (
-            <AnimalList animalList={animalList} onHandleLike={handleLike} />
+            <AnimalList
+              animalList={animalList}
+              onHandleLike={handleLike}
+              pageTitle="Unsere Tiere"
+            />
           )}
         />
         <Route path="/events" render={() => <DailyEventsList />} />

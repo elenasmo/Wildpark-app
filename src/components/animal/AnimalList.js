@@ -5,7 +5,7 @@ import { GridVertical } from 'styled-icons/boxicons-regular/GridVertical'
 import { ViewList } from 'styled-icons/material/ViewList'
 import { getAnimalsFilterAndSorted } from '../../utils/animal_utils'
 
-export default function AnimalList({ onHandleLike, animalList }) {
+export default function AnimalList({ onHandleLike, animalList, pageTitle }) {
   const [gridView, setGridView] = useState(false)
 
   const [filter, setFilter] = useState('all')
@@ -13,7 +13,7 @@ export default function AnimalList({ onHandleLike, animalList }) {
 
   return (
     <AnimalPage>
-      <h2>Unsere Tiere</h2>
+      <h2>{pageTitle}</h2>
       <GridStyle>
         <div>
           <ViewListStyled onClick={showFullWidth} />
@@ -99,6 +99,7 @@ export default function AnimalList({ onHandleLike, animalList }) {
                   isLiked={animal.isLiked}
                   latitude={animal.latitude}
                   longitude={animal.longitude}
+                  icon={animal.icon}
                 />
               )
             )}
