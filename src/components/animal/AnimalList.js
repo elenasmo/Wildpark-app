@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import styled from 'styled-components/macro'
 import Animal from './Animal'
+import Page from '../common/Page'
 import { GridVertical } from 'styled-icons/boxicons-regular/GridVertical'
 import { ViewList } from 'styled-icons/material/ViewList'
 import { getAnimalsFilterAndSorted } from '../../utils/animal_utils'
@@ -12,36 +13,37 @@ export default function AnimalList({ onHandleLike, animalList, pageTitle }) {
   const [sortBy, setSortBy] = useState('none')
 
   return (
-    <AnimalPage>
-      <h2>{pageTitle}</h2>
-      <GridStyle>
-        <div>
-          <ViewListStyled onClick={showFullWidth} />
-          <GridVerticalStyled onClick={showGrid} />
-        </div>
-        <LabelStyled>Filtern:</LabelStyled>
-        <SelectStyled
-          name="filter"
-          onChange={handleFilterChange}
-          placeholder="select"
-        >
-          <option value="all">alle Tiere</option>
-          <option value="liked">Lieblingstiere</option>
-        </SelectStyled>
-        <LabelStyled>Sortieren:</LabelStyled>
-        <SelectStyled
-          name="sort"
-          onChange={handleSortChange}
-          placeholder="select"
-        >
-          <option value="title">alphabetisch</option>
-          <option value="station">nach Station</option>
-          <option value="none">---</option>
-        </SelectStyled>
-      </GridStyle>
+    <Page pageTitle={pageTitle}>
+      <AnimalPage>
+        <GridStyle>
+          <div>
+            <ViewListStyled onClick={showFullWidth} />
+            <GridVerticalStyled onClick={showGrid} />
+          </div>
+          <LabelStyled>Filtern:</LabelStyled>
+          <SelectStyled
+            name="filter"
+            onChange={handleFilterChange}
+            placeholder="select"
+          >
+            <option value="all">alle Tiere</option>
+            <option value="liked">Lieblingstiere</option>
+          </SelectStyled>
+          <LabelStyled>Sortieren:</LabelStyled>
+          <SelectStyled
+            name="sort"
+            onChange={handleSortChange}
+            placeholder="select"
+          >
+            <option value="title">alphabetisch</option>
+            <option value="station">nach Station</option>
+            <option value="none">---</option>
+          </SelectStyled>
+        </GridStyle>
 
-      {renderArrangement()}
-    </AnimalPage>
+        {renderArrangement()}
+      </AnimalPage>
+    </Page>
   )
 
   function renderArrangement() {
