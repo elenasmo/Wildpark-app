@@ -14,10 +14,10 @@ const geolocateStyle = {
   margin: '50px',
   padding: '10px'
 }
+const bounds = [[53.235344, 10.039464], [53.240696, 10.052925]]
 
 export default function MapPage({ animalList, initAnimal, pageTitle }) {
   const [activeAnimal, setActiveAnimal] = useState(initAnimal)
-
   const [isPopupVisible, setIsPopupVisible] = useState(initAnimal != null)
 
   const [viewport, setViewport] = useState({
@@ -25,9 +25,9 @@ export default function MapPage({ animalList, initAnimal, pageTitle }) {
     longitude: 10.044543,
     width: '100vw',
     height: '80vh',
-    zoom: 16,
-    maxZoom: 17,
-    minZoom: 15
+    zoom: 15,
+    maxZoom: 18,
+    minZoom: 14
   })
 
   return (
@@ -58,8 +58,9 @@ export default function MapPage({ animalList, initAnimal, pageTitle }) {
           onTouchStart={() => setActiveAnimal(null)}
           {...viewport}
           mapboxApiAccessToken={token}
-          mapStyle="mapbox://styles/qesmo/ck1uga55z01ws1do6z6dn2akj"
+          mapStyle="mapbox://styles/qesmo/ck1v85i1p041r1cn5zlht4pzq"
           onViewportChange={viewport => setViewport(viewport)}
+          setMaxBounds={bounds}
         >
           {animalList.map(animal => (
             <Marker
@@ -80,6 +81,7 @@ export default function MapPage({ animalList, initAnimal, pageTitle }) {
               )}
             </Marker>
           ))}
+
           <GeolocateControl
             style={geolocateStyle}
             positionOptions={{ enableHighAccuracy: true }}

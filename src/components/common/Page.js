@@ -18,12 +18,12 @@ const Header = styled.header`
   justify-content: center;
   align-items: center;
   background: transparent;
-  color: white;
-  font-size: 30px;
+  color: #467335;
+  font-size: 25px;
   padding: 7px;
   width: 100vw;
   position: relative;
-  box-shadow: 0 10px 10px #0002;
+  /* box-shadow: 0 10px 10px #0002;
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -39,5 +39,5 @@ const Header = styled.header`
     bottom: 0;
     right: 0;
     left: 0;
-  }
+  } */
 `

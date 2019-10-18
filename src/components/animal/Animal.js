@@ -78,9 +78,11 @@ export default function Animal({
 const AnimalStyled = styled.section`
   background: white;
   box-shadow: 0 10px 10px #0002;
+  border-radius: 8px;
   position: relative;
   img {
     vertical-align: middle;
+    border-radius: 8px;
   }
 
   section {
