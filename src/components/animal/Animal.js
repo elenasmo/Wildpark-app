@@ -78,10 +78,11 @@ export default function Animal({
 const AnimalStyled = styled.section`
   background: white;
   box-shadow: 0 10px 10px #0002;
-
+  border-radius: 8px;
   position: relative;
   img {
     vertical-align: middle;
+    border-radius: 8px;
   }
 
   section {
@@ -132,18 +133,18 @@ const ButtonStyled = styled.button`
 
 const HeartStyled = styled(HeartOutline)`
   height: 40px;
-  color: #823d85;
+  color: #467335;
   outline: none;
 `
 
 const HeartFilledStyled = styled(HeartFullOutline)`
   height: 40px;
-  color: #823d85;
+  color: #467335;
 `
 
 const PlaceStyled = styled(Place)`
   height: 40px;
-  color: #823d85;
+  color: #467335;
 `
 const StationStyled = styled.div`
   height: 35px;

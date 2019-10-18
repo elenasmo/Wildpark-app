@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import ReactMapGl, { Marker, Popup, GeolocateControl } from 'react-map-gl'
 import styled from 'styled-components'
+import Page from '../common/Page'
+import { Restaurant } from 'styled-icons/material/Restaurant'
+import { Child } from 'styled-icons/fa-solid/Child'
+import { Restroom } from 'styled-icons/fa-solid/Restroom'
+import { Baidu } from 'styled-icons/boxicons-logos/Baidu'
 
 const token = process.env.REACT_APP_MAPBOX_TOKEN
 
@@ -9,10 +14,10 @@ const geolocateStyle = {
   margin: '50px',
   padding: '10px'
 }
+const bounds = [[53.235344, 10.039464], [53.240696, 10.052925]]
 
-export default function MapPage({ animalList, initAnimal }) {
+export default function MapPage({ animalList, initAnimal, pageTitle }) {
   const [activeAnimal, setActiveAnimal] = useState(initAnimal)
-
   const [isPopupVisible, setIsPopupVisible] = useState(initAnimal != null)
 
   const [viewport, setViewport] = useState({
@@ -20,48 +25,71 @@ export default function MapPage({ animalList, initAnimal }) {
     longitude: 10.044543,
     width: '100vw',
     height: '80vh',
-    zoom: 16,
-    maxZoom: 17,
-    minZoom: 15
+    zoom: 15,
+    maxZoom: 18,
+    minZoom: 14
   })
 
   return (
     <>
-      <h2>Parkplan</h2>
-      <p
-        style={{ textAlign: 'center', fontSize: '25px', fontWeight: 'bolder' }}
-      ></p>
-      <ReactMapGl
-        onTouchStart={() => setActiveAnimal(null)}
-        {...viewport}
-        mapboxApiAccessToken={token}
-        mapStyle="mapbox://styles/qesmo/ck1uga55z01ws1do6z6dn2akj"
-        onViewportChange={viewport => setViewport(viewport)}
-      >
-        {animalList.map(animal => (
-          <Marker
-            key={animal.station}
-            latitude={parseFloat(animal.latitude)}
-            longitude={parseFloat(animal.longitude)}
-          >
-            {animal.icon == null ? (
-              <ButtonStyled onClick={() => showPopup(animal)}>
-                {animal.station}
-              </ButtonStyled>
-            ) : (
-              <button onClick={() => showPopup(animal)}>
-                <IconStyled src={animal.icon} alt={animal.title} />
-              </button>
-            )}
-          </Marker>
-        ))}
-        <GeolocateControl
-          style={geolocateStyle}
-          positionOptions={{ enableHighAccuracy: true }}
-          trackUserLocation={true}
-        />
-        {renderPopup()}
-      </ReactMapGl>
+      <Page pageTitle={pageTitle}>
+        <FilterStyled>
+          <button>
+            <BaiduStyled />
+          </button>
+          <button>
+            <RestaurantStyled />
+          </button>
+          <button>
+            <WCStyled />
+          </button>
+          <button>
+            <PlaygroundStyled />
+          </button>
+        </FilterStyled>
+        <p
+          style={{
+            textAlign: 'center',
+            fontSize: '25px',
+            fontWeight: 'bolder'
+          }}
+        ></p>
+        <ReactMapGl
+          onTouchStart={() => setActiveAnimal(null)}
+          {...viewport}
+          mapboxApiAccessToken={token}
+          mapStyle="mapbox://styles/qesmo/ck1v85i1p041r1cn5zlht4pzq"
+          onViewportChange={viewport => setViewport(viewport)}
+          setMaxBounds={bounds}
+        >
+          {animalList.map(animal => (
+            <Marker
+              key={animal.station}
+              latitude={parseFloat(animal.latitude)}
+              longitude={parseFloat(animal.longitude)}
+            >
+              {animal.icon == null ? (
+                <ButtonStyled onClick={() => showPopup(animal)}>
+                  {animal.station}
+                </ButtonStyled>
+              ) : (
+                <IconStyled
+                  src={animal.icon}
+                  alt={animal.title}
+                  onClick={() => showPopup(animal)}
+                />
+              )}
+            </Marker>
+          ))}
+
+          <GeolocateControl
+            style={geolocateStyle}
+            positionOptions={{ enableHighAccuracy: true }}
+            trackUserLocation={true}
+          />
+          {renderPopup()}
+        </ReactMapGl>
+      </Page>
     </>
   )
 
@@ -104,4 +132,28 @@ const IconStyled = styled.img`
   width: 40px;
   font-size: 1.2em;
   transform: translateX(-50%);
+`
+const FilterStyled = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  text-align: center;
+  margin: 15px;
+  > button {
+    background-color: lightgrey;
+    margin: 5px;
+    padding: 2px;
+  }
+`
+const RestaurantStyled = styled(Restaurant)`
+  height: 30px;
+`
+const WCStyled = styled(Restroom)`
+  height: 25px;
+`
+const PlaygroundStyled = styled(Child)`
+  height: 25px;
+`
+const BaiduStyled = styled(Baidu)`
+  height: 25px;
 `

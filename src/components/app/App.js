@@ -28,16 +28,24 @@ export default function App() {
             <AnimalList
               animalList={animalList}
               onHandleLike={handleLike}
-              pageTitle="Unsere Tiere"
+              pageTitle={'Unsere Tiere'}
             />
           )}
         />
-        <Route path="/events" render={() => <DailyEventsList />} />
+        <Route
+          path="/events"
+          render={() => <DailyEventsList pageTitle={'Vorführungen'} />}
+        />
         <Route
           path="/map"
           render={props => {
-            console.log('ROUTE', props)
-            return <MapPage {...props.location} animalList={animalList} />
+            return (
+              <MapPage
+                {...props.location}
+                animalList={animalList}
+                pageTitle={'Parkplan'}
+              />
+            )
           }}
         />
       </Router>
