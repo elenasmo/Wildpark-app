@@ -49,6 +49,9 @@ export default function Animal({
         <section>
           <TitleStyled>{title}</TitleStyled>
           <div>
+            <ButtonStyled onClick={toggleLikeButton}>
+              {isLiked ? <HeartFilledStyled /> : <HeartStyled />}
+            </ButtonStyled>
             <Link
               to={{
                 pathname: '/map',
@@ -57,9 +60,6 @@ export default function Animal({
             >
               <PlaceStyled />
             </Link>
-            <ButtonStyled onClick={toggleLikeButton}>
-              {isLiked ? <HeartFilledStyled /> : <HeartStyled />}
-            </ButtonStyled>
           </div>
         </section>
         <ArrowButton onClick={toggleInformation}>

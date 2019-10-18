@@ -12,7 +12,7 @@ const token = process.env.REACT_APP_MAPBOX_TOKEN
 
 const geolocateStyle = {
   float: 'left',
-  margin: '50px',
+  margin: '10px',
   padding: '10px'
 }
 const bounds = [[53.235344, 10.039464], [53.240696, 10.052925]]
@@ -30,13 +30,14 @@ const hospitalityList = [
 export default function MapPage({ animalList, initAnimal, pageTitle }) {
   const [activeMarker, setActiveMarker] = useState(initAnimal)
   const [isPopupVisible, setIsPopupVisible] = useState(initAnimal != null)
-  const [selectedMarkers, setSelectedMarkers] = useState('animals')
+  const [isAnimalActive, setIsAnimalActive] = useState(true)
+  const [isHospitalityActive, setIsHospitalityActive] = useState(false)
 
   const [viewport, setViewport] = useState({
     latitude: 53.23756,
     longitude: 10.044543,
     width: '100vw',
-    height: '80vh',
+    height: '100vh',
     zoom: 15,
     maxZoom: 18,
     minZoom: 14
@@ -44,11 +45,11 @@ export default function MapPage({ animalList, initAnimal, pageTitle }) {
 
   function withMarkers() {
     let list = []
-    if (selectedMarkers === 'animals') {
-      list = [...animalList]
+    if (isAnimalActive) {
+      list = [...list, ...animalList]
     }
-    if (selectedMarkers === 'hospitality') {
-      list = [...hospitalityList]
+    if (isHospitalityActive) {
+      list = [...list, ...hospitalityList]
     }
 
     return <RenderMarkers list={list} onClick={handlePopup} />
@@ -58,28 +59,22 @@ export default function MapPage({ animalList, initAnimal, pageTitle }) {
     <>
       <Page pageTitle={pageTitle}>
         <FilterStyled>
-          <button
+          <BaiduStyled
             onClick={() => {
-              setSelectedMarkers('animals')
+              setIsAnimalActive(!isAnimalActive)
               setIsPopupVisible(false)
             }}
-          >
-            <BaiduStyled />
-          </button>
-          <button
+          />
+          <RestaurantStyled
             onClick={() => {
-              setSelectedMarkers('hospitality')
+              setIsHospitalityActive(!isHospitalityActive)
               setIsPopupVisible(false)
             }}
-          >
-            <RestaurantStyled />
-          </button>
-          <button>
-            <WCStyled />
-          </button>
-          <button>
-            <PlaygroundStyled />
-          </button>
+          />
+
+          <WCStyled />
+
+          <PlaygroundStyled />
         </FilterStyled>
         <p
           style={{
@@ -144,6 +139,10 @@ const FilterStyled = styled.div`
   justify-content: center;
   text-align: center;
   margin: 15px;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  z-index: 10;
   > button {
     background-color: lightgrey;
     margin: 5px;
@@ -151,18 +150,24 @@ const FilterStyled = styled.div`
   }
 `
 const RestaurantStyled = styled(Restaurant)`
-  height: 30px;
+  height: 60px;
+  padding: 10px;
 `
 
 const WCStyled = styled(Restroom)`
-  height: 25px;
+  height: 60px;
+  padding: 10px;
 `
 const PlaygroundStyled = styled(Child)`
-  height: 25px;
+  height: 60px;
+  padding: 10px;
 `
 const BaiduStyled = styled(Baidu)`
-  height: 25px;
+  height: 60px;
+  padding: 10px;
 `
 const MapStyled = styled.div`
   box-shadow: 0px 0px 10px 10px #0003;
+  position: relative;
+  height: 100vh;
 `
