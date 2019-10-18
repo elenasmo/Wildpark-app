@@ -14,39 +14,40 @@ export default function AnimalList({ onHandleLike, animalList, pageTitle }) {
   return (
     <Page pageTitle={pageTitle}>
       <AnimalPage>
-        <GridStyle>
-          <div>
-            <ToggleButtonLeft>
-              <ViewListStyled onClick={showFullWidth} />
-            </ToggleButtonLeft>
-            <ToggleButtonRight>
-              <GridVerticalStyled onClick={showGrid} />
-            </ToggleButtonRight>
-          </div>
-          <div>
-            <LabelStyled>Filtern:</LabelStyled>
+        <FlexStyle>
+          <SelectGroup>
             <SelectStyled
               name="filter"
               onChange={handleFilterChange}
               placeholder="select"
             >
+              <option>Filtern</option>
               <option value="all">alle Tiere</option>
               <option value="liked">Lieblingstiere</option>
             </SelectStyled>
-          </div>
+          </SelectGroup>
           <div>
-            <LabelStyled>Sortieren:</LabelStyled>
+            <ToggleButtonLeft gridView={gridView}>
+              <ViewListStyled onClick={showFullWidth} />
+            </ToggleButtonLeft>
+            <ToggleButtonRight gridView={gridView}>
+              <GridVerticalStyled onClick={showGrid} />
+            </ToggleButtonRight>
+          </div>
+
+          <div>
             <SelectStyled
               name="sort"
               onChange={handleSortChange}
               placeholder="select"
             >
+              <option>Sortieren</option>
               <option value="title">alphabetisch</option>
               <option value="station">nach Station</option>
               <option value="none">---</option>
             </SelectStyled>
           </div>
-        </GridStyle>
+        </FlexStyle>
 
         {renderArrangement()}
       </AnimalPage>
@@ -143,9 +144,8 @@ const AnimalPage = styled.section`
 
 const GridLayoutStyled = styled.div`
   display: grid;
-  grid-gap: 6px;
+  grid-gap: 12px;
   grid-template-columns: 1fr 1fr;
-  padding: 6px;
 `
 
 const ColumnStyled = styled.div`
@@ -153,41 +153,65 @@ const ColumnStyled = styled.div`
   grid-auto-rows: min-content;
   grid-gap: 10px;
 `
-const GridStyle = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+const FlexStyle = styled.div`
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  align-content: center;
+  flex-direction: row;
 `
 
 const FullViewStyled = styled.div`
+  margin-top: 20px;
   display: grid;
   grid-gap: 20px;
 `
 
 const GridVerticalStyled = styled(GridVertical)`
   height: 25px;
-  color: grey;
   margin: 3px;
+  color: grey;
 `
 const ViewListStyled = styled(ViewList)`
   height: 31px;
   color: grey;
 `
+const SelectGroup = styled.div``
 
-const LabelStyled = styled.label`
-  font-size: 16px;
-`
 const SelectStyled = styled.select`
+  position: relative;
+  display: flex;
+  height: 33px;
+  background-color: lightgrey;
+  border: none;
+  outline: none;
+  border-radius: 10px;
+
   > option {
-    font-size: 16px;
+    font-size: 20px;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
   }
 `
+
 const ToggleButtonLeft = styled.button`
-  background-color: white;
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
+  border: none;
+  outline: none;
+  box-shadow: ${({ gridView }) =>
+    gridView
+      ? 'inset 10px 10px 10px 10px #0002'
+      : 'inset 1px 1px 1px 1px #0002'};
 `
 const ToggleButtonRight = styled.button`
-  background-color: white;
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
+  border: none;
+  outline: none;
+  box-shadow: ${({ gridView }) =>
+    gridView
+      ? 'inset 1px 1px 1px 1px #0002'
+      : 'inset 10px 10px 10px 10px #0002'};
 `

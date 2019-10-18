@@ -49,7 +49,9 @@ export default function Animal({
         <section>
           <TitleStyled>{title}</TitleStyled>
           <div>
-            {/* <StationStyled>{station}</StationStyled> */}
+            <ButtonStyled onClick={toggleLikeButton}>
+              {isLiked ? <HeartFilledStyled /> : <HeartStyled />}
+            </ButtonStyled>
             <Link
               to={{
                 pathname: '/map',
@@ -58,9 +60,6 @@ export default function Animal({
             >
               <PlaceStyled />
             </Link>
-            <ButtonStyled onClick={toggleLikeButton}>
-              {isLiked ? <HeartFilledStyled /> : <HeartStyled />}
-            </ButtonStyled>
           </div>
         </section>
         <ArrowButton onClick={toggleInformation}>
@@ -133,29 +132,16 @@ const ButtonStyled = styled.button`
 
 const HeartStyled = styled(HeartOutline)`
   height: 40px;
-  color: #467335;
+  color: #8b488c;
   outline: none;
 `
 
 const HeartFilledStyled = styled(HeartFullOutline)`
   height: 40px;
-  color: #467335;
+  color: #8b488c;
 `
 
 const PlaceStyled = styled(Place)`
   height: 40px;
-  color: #467335;
-`
-const StationStyled = styled.div`
-  height: 35px;
-  width: 35px;
-  color: #823d85;
-  font-style: bold;
-  border-radius: 50%;
-  display: flex;
-  text-align: center;
-  justify-content: center;
-  align-items: center;
-  border: 3px solid #823d85;
-  outline: none;
+  color: #8b488c;
 `

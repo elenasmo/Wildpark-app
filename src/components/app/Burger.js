@@ -32,7 +32,7 @@ const StyledBurger = styled.button`
   div {
     width: 32px;
     height: 5px;
-    background: #467335;
+    background: #8b488c;
     border-radius: 2px;
     transition: all 0.3s linear;
     position: relative;

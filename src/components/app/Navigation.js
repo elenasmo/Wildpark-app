@@ -21,13 +21,13 @@ export default function Navigation({ open, handleClick }) {
 const MenuStyled = styled.nav`
   display: flex;
   flex-direction: column;
-  background: whitesmoke;
+  background: white;
   right: ${({ open }) => (open ? 0 : '-300px')};
   height: 100vh;
   text-align: left;
   padding: 10px;
   position: fixed;
-  top: 40px;
+  top: 35px;
   margin: 10px;
   transition: right 0.3s ease-in-out;
   z-index: 10;
@@ -36,7 +36,7 @@ const MenuStyled = styled.nav`
 const NavLinkStyled = styled(NavLink)`
   font-size: 1.2rem;
   padding: 15px;
-  color: #467335;
+  color: darkgrey;
   text-decoration: none;
   transition: color 0.3s linear;
 `
