@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react'
-import ReactMapGl, { Marker, Popup, GeolocateControl } from 'react-map-gl'
+import React, { useState } from 'react'
+import ReactMapGl, { Popup, GeolocateControl } from 'react-map-gl'
 import styled from 'styled-components'
 import Page from '../common/Page'
+import RenderMarkers from './RenderMarkers'
 import { Restaurant } from 'styled-icons/material/Restaurant'
 import { Child } from 'styled-icons/fa-solid/Child'
 import { Restroom } from 'styled-icons/fa-solid/Restroom'
@@ -16,9 +17,20 @@ const geolocateStyle = {
 }
 const bounds = [[53.235344, 10.039464], [53.240696, 10.052925]]
 
+const hospitalityList = [
+  { title: 'Elchlodge', latitude: '53.239279', longitude: '10.048521' },
+  { title: 'Restaurant', latitude: '53.236652', longitude: '10.042483' },
+  {
+    title: 'Kiosk mit Blick auf den Spielplatz',
+    latitude: '53.236484',
+    longitude: '10.041934'
+  }
+]
+
 export default function MapPage({ animalList, initAnimal, pageTitle }) {
-  const [activeAnimal, setActiveAnimal] = useState(initAnimal)
+  const [activeMarker, setActiveMarker] = useState(initAnimal)
   const [isPopupVisible, setIsPopupVisible] = useState(initAnimal != null)
+  const [selectedMarkers, setSelectedMarkers] = useState('animals')
 
   const [viewport, setViewport] = useState({
     latitude: 53.23756,
@@ -30,14 +42,36 @@ export default function MapPage({ animalList, initAnimal, pageTitle }) {
     minZoom: 14
   })
 
+  function withMarkers() {
+    let list = []
+    if (selectedMarkers === 'animals') {
+      list = [...animalList]
+    }
+    if (selectedMarkers === 'hospitality') {
+      list = [...hospitalityList]
+    }
+
+    return <RenderMarkers list={list} onClick={handlePopup} />
+  }
+
   return (
     <>
       <Page pageTitle={pageTitle}>
         <FilterStyled>
-          <button>
+          <button
+            onClick={() => {
+              setSelectedMarkers('animals')
+              setIsPopupVisible(false)
+            }}
+          >
             <BaiduStyled />
           </button>
-          <button>
+          <button
+            onClick={() => {
+              setSelectedMarkers('hospitality')
+              setIsPopupVisible(false)
+            }}
+          >
             <RestaurantStyled />
           </button>
           <button>
@@ -54,85 +88,56 @@ export default function MapPage({ animalList, initAnimal, pageTitle }) {
             fontWeight: 'bolder'
           }}
         ></p>
-        <ReactMapGl
-          onTouchStart={() => setActiveAnimal(null)}
-          {...viewport}
-          mapboxApiAccessToken={token}
-          mapStyle="mapbox://styles/qesmo/ck1v85i1p041r1cn5zlht4pzq"
-          onViewportChange={viewport => setViewport(viewport)}
-          setMaxBounds={bounds}
-        >
-          {animalList.map(animal => (
-            <Marker
-              key={animal.station}
-              latitude={parseFloat(animal.latitude)}
-              longitude={parseFloat(animal.longitude)}
-            >
-              {animal.icon == null ? (
-                <ButtonStyled onClick={() => showPopup(animal)}>
-                  {animal.station}
-                </ButtonStyled>
-              ) : (
-                <IconStyled
-                  src={animal.icon}
-                  alt={animal.title}
-                  onClick={() => showPopup(animal)}
-                />
-              )}
-            </Marker>
-          ))}
-
-          <GeolocateControl
-            style={geolocateStyle}
-            positionOptions={{ enableHighAccuracy: true }}
-            trackUserLocation={true}
-          />
-          {renderPopup()}
-        </ReactMapGl>
+        <MapStyled>
+          <ReactMapGl
+            onTouchStart={() => setActiveMarker(null)}
+            {...viewport}
+            mapboxApiAccessToken={token}
+            mapStyle="mapbox://styles/qesmo/ck1v85i1p041r1cn5zlht4pzq"
+            maxBounds={bounds}
+            onViewportChange={viewport => setViewport(viewport)}
+          >
+            <GeolocateControl
+              style={geolocateStyle}
+              positionOptions={{ enableHighAccuracy: true }}
+              trackUserLocation={true}
+            />
+            {withMarkers()}
+            {renderPopup()}
+          </ReactMapGl>
+        </MapStyled>
       </Page>
     </>
   )
 
   function renderPopup() {
-    if (isPopupVisible && activeAnimal) {
+    if (isPopupVisible && activeMarker) {
       return (
         <Popup
-          latitude={parseFloat(activeAnimal.latitude)}
-          longitude={parseFloat(activeAnimal.longitude)}
+          latitude={parseFloat(activeMarker.latitude)}
+          longitude={parseFloat(activeMarker.longitude)}
           onClose={() => {
-            setActiveAnimal(null)
+            setActiveMarker(null)
           }}
+          onClick={togglePopup}
         >
-          <div>{activeAnimal.title}</div>
+          <div>{activeMarker.title}</div>
         </Popup>
       )
     }
   }
-  function showPopup(animal) {
-    setActiveAnimal(animal)
-    activeAnimal === animal
+  function handlePopup(marker) {
+    setActiveMarker(marker)
+    activeMarker === marker
       ? setIsPopupVisible(!isPopupVisible)
       : setIsPopupVisible(true)
   }
+
+  function togglePopup() {
+    setIsPopupVisible(!isPopupVisible)
+  }
 }
 
-const ButtonStyled = styled.button`
-  display: flex;
-  height: 30px;
-  width: 30px;
-  border-radius: 50%;
-  background-color: white;
-  text-align: center;
-  justify-content: center;
-  font-weight: bold;
-  font-size: 1.2em;
-  transform: translateX(-50%);
-`
-const IconStyled = styled.img`
-  width: 40px;
-  font-size: 1.2em;
-  transform: translateX(-50%);
-`
 const FilterStyled = styled.div`
   display: flex;
   flex-direction: row;
@@ -148,6 +153,7 @@ const FilterStyled = styled.div`
 const RestaurantStyled = styled(Restaurant)`
   height: 30px;
 `
+
 const WCStyled = styled(Restroom)`
   height: 25px;
 `
@@ -156,4 +162,7 @@ const PlaygroundStyled = styled(Child)`
 `
 const BaiduStyled = styled(Baidu)`
   height: 25px;
+`
+const MapStyled = styled.div`
+  box-shadow: 0px 0px 10px 10px #0003;
 `

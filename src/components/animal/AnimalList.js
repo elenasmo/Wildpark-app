@@ -143,9 +143,8 @@ const AnimalPage = styled.section`
 
 const GridLayoutStyled = styled.div`
   display: grid;
-  grid-gap: 6px;
+  grid-gap: 12px;
   grid-template-columns: 1fr 1fr;
-  padding: 6px;
 `
 
 const ColumnStyled = styled.div`
@@ -159,6 +158,7 @@ const GridStyle = styled.div`
 `
 
 const FullViewStyled = styled.div`
+  margin-top: 20px;
   display: grid;
   grid-gap: 20px;
 `
@@ -185,9 +185,11 @@ const ToggleButtonLeft = styled.button`
   background-color: white;
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
+  border: none;
 `
 const ToggleButtonRight = styled.button`
   background-color: white;
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
+  border: none;
 `
