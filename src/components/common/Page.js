@@ -5,7 +5,7 @@ export default function Page({ pageTitle, children, setOpen }) {
   return (
     <PageStyled>
       <Header>{pageTitle}</Header>
-      <TestStyled onClick={() => setOpen(false)}>{children}</TestStyled>
+      <MainStyled onClick={() => setOpen(false)}>{children}</MainStyled>
     </PageStyled>
   )
 }
@@ -13,7 +13,7 @@ export default function Page({ pageTitle, children, setOpen }) {
 const PageStyled = styled.section`
   margin: 0;
 `
-const TestStyled = styled.div``
+const MainStyled = styled.div``
 
 const Header = styled.header`
   display: flex;
