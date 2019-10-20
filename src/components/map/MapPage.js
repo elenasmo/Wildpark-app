@@ -14,7 +14,12 @@ const geolocateStyle = {
 }
 const bounds = [[53.235344, 10.039464], [53.240696, 10.052925]]
 
-export default function MapPage({ animalList, initAnimal, pageTitle }) {
+export default function MapPage({
+  animalList,
+  initAnimal,
+  pageTitle,
+  setOpen
+}) {
   const [activeMarker, setActiveMarker] = useState(initAnimal)
   const [isPopupVisible, setIsPopupVisible] = useState(initAnimal != null)
   const [isAnimalActive, setIsAnimalActive] = useState(true)
@@ -52,7 +57,7 @@ export default function MapPage({ animalList, initAnimal, pageTitle }) {
 
   return (
     <>
-      <Page pageTitle={pageTitle}>
+      <Page pageTitle={pageTitle} setOpen={setOpen}>
         <MapStyled>
           <ReactMapGl
             onTouchStart={() => setActiveMarker(null)}

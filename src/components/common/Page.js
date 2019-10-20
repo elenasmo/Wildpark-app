@@ -1,11 +1,11 @@
 import React from 'react'
 import styled from 'styled-components/macro'
 
-export default function Page({ pageTitle, children }) {
+export default function Page({ pageTitle, children, setOpen }) {
   return (
     <PageStyled>
       <Header>{pageTitle}</Header>
-      {children}
+      <TestStyled onClick={() => setOpen(false)}>{children}</TestStyled>
     </PageStyled>
   )
 }
@@ -13,6 +13,8 @@ export default function Page({ pageTitle, children }) {
 const PageStyled = styled.section`
   margin: 0;
 `
+const TestStyled = styled.div``
+
 const Header = styled.header`
   display: flex;
   justify-content: center;

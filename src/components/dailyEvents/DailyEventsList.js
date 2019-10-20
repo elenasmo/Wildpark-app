@@ -4,13 +4,13 @@ import Page from '../common/Page'
 import styled from 'styled-components'
 import { getEvents } from '../services'
 
-export default function DailyEventsList({ pageTitle }) {
+export default function DailyEventsList({ pageTitle, setOpen }) {
   const [events, setEvents] = useState([])
   useEffect(() => {
     getEvents().then(setEvents)
   }, [])
   return (
-    <Page pageTitle={pageTitle}>
+    <Page pageTitle={pageTitle} setOpen={setOpen}>
       <DailyEventsPage>
         {events.map(item => (
           <DailyEvent
