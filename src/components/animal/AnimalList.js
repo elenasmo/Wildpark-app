@@ -6,13 +6,18 @@ import { GridVertical } from 'styled-icons/boxicons-regular/GridVertical'
 import { ViewList } from 'styled-icons/material/ViewList'
 import { getAnimalsFilterAndSorted } from '../../utils/animal_utils'
 
-export default function AnimalList({ onHandleLike, animalList, pageTitle }) {
+export default function AnimalList({
+  onHandleLike,
+  animalList,
+  pageTitle,
+  setOpen
+}) {
   const [gridView, setGridView] = useState(false)
   const [filter, setFilter] = useState('all')
   const [sortBy, setSortBy] = useState('none')
 
   return (
-    <Page pageTitle={pageTitle}>
+    <Page pageTitle={pageTitle} setOpen={setOpen}>
       <AnimalPage>
         <FlexStyle>
           <SelectGroup>
@@ -186,12 +191,12 @@ const SelectStyled = styled.select`
   border: none;
   outline: none;
   border-radius: 10px;
-
+  padding-left: 20px;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
   > option {
     font-size: 20px;
-    align-items: center;
-    text-align: center;
-    justify-content: center;
   }
 `
 

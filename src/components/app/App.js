@@ -26,6 +26,7 @@ export default function App() {
           path="/"
           render={() => (
             <AnimalList
+              setOpen={setOpen}
               animalList={animalList}
               onHandleLike={handleLike}
               pageTitle={'Unsere Tiere'}
@@ -34,7 +35,9 @@ export default function App() {
         />
         <Route
           path="/events"
-          render={() => <DailyEventsList pageTitle={'Vorführungen'} />}
+          render={() => (
+            <DailyEventsList setOpen={setOpen} pageTitle={'Vorführungen'} />
+          )}
         />
         <Route
           path="/map"
@@ -44,6 +47,7 @@ export default function App() {
                 {...props.location}
                 animalList={animalList}
                 pageTitle={'Parkplan'}
+                setOpen={setOpen}
               />
             )
           }}
