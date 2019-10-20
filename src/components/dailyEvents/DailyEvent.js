@@ -7,23 +7,32 @@ export default function DailyEvent({
   information,
   times,
   timesWeekend,
-  month
+  month,
+  onNewComment,
+  dailyEvent
 }) {
-  const Star = ({ active = false, onClick = e => e }) => (
+  const [starsSelected, selectStar] = useState(0)
+
+  const Star = ({ active = false, onClick }) => (
     <StarsStyled active={active} onClick={onClick} />
   )
 
-  const StarRating = ({ totalStars }) => {
-    const [starsSelected, selectStar] = useState(0)
+  const StarRating = ({ totalStars = 5, activeStars }) => {
+    const isActive = i => {
+      if (activeStars != null) {
+        return i < activeStars
+      } else {
+        return i < starsSelected
+      }
+    }
     return (
       <RatingStyled>
         {[...Array(totalStars)].map((n, i) => (
           <Star
             key={i}
-            active={i < starsSelected}
+            active={isActive(i)}
             onClick={() => {
               selectStar(i + 1)
-              console.log(starsSelected)
             }}
           />
         ))}
@@ -40,12 +49,21 @@ export default function DailyEvent({
           <p>{month}</p>
           <p>{times}</p>
           <p>{timesWeekend}</p>
+          {dailyEvent.rating.map((rating, index) => {
+            return (
+              <React.Fragment key={index}>
+                <p>{rating.comment}</p>
+                <StarRating activeStars={rating.stars || 0} />
+              </React.Fragment>
+            )
+          })}
         </div>
-        <FormStyled>
+        <FormStyled onSubmit={onHandleSubmit}>
           <label>
             Hat Ihnen die Vorstellung gefallen?
             <StarRating totalStars={5} />
             <textarea
+              name="comment"
               type="text"
               placeholder="Schreiben Sie hier einen Kommentar!"
             />
@@ -55,6 +73,18 @@ export default function DailyEvent({
       </EventStyled>
     </>
   )
+
+  function onHandleSubmit(event) {
+    event.preventDefault()
+    const form = event.target
+    const formData = new FormData(form)
+    const data = Object.fromEntries(formData)
+    //ändern
+    data.stars = starsSelected
+    console.log(data)
+    onNewComment(dailyEvent, data)
+    form.reset()
+  }
 }
 
 const EventStyled = styled.section`

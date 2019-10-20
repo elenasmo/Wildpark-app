@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import DailyEvent from './DailyEvent'
 import Page from '../common/Page'
 import styled from 'styled-components'
-import { getEvents } from '../services'
+import { getEvents, patchEvent } from '../services'
 
 export default function DailyEventsList({ pageTitle, setOpen }) {
   const [events, setEvents] = useState([])
@@ -21,11 +21,28 @@ export default function DailyEventsList({ pageTitle, setOpen }) {
             month={item.month}
             times={item.times}
             timesWeekend={item.timesWeekend}
+            dailyEvent={item}
+            onNewComment={onNewComment}
           />
         ))}
       </DailyEventsPage>
     </Page>
   )
+
+  function onNewComment(dailyEvent, newComment) {
+    patchEvent(dailyEvent._id, {
+      rating: [...dailyEvent.rating, newComment]
+    }).then(updatedEvent => {
+      const index = events.findIndex(
+        dailyEvent => dailyEvent._id === updatedEvent._id
+      )
+      setEvents([
+        ...events.slice(0, index),
+        { ...updatedEvent },
+        ...events.slice(index + 1)
+      ])
+    })
+  }
 }
 
 const DailyEventsPage = styled.section`

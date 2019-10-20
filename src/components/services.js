@@ -33,7 +33,7 @@ export function patchEvent(id, data) {
 }
 
 function fetchEvents({ method = 'GET', id = '', data } = {}) {
-  return fetch('/dailyevents' + id, {
+  return fetch('/dailyevents/' + id, {
     method,
     body: JSON.stringify(data),
     headers: {

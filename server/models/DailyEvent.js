@@ -6,7 +6,8 @@ const DailyEvent = mongoose.model('DailyEvent', {
   information: String,
   month: String,
   times: String,
-  timesWeekend: String
+  timesWeekend: String,
+  rating: Array
 })
 
 module.exports = DailyEvent
