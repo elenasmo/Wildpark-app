@@ -186,12 +186,12 @@ const SelectStyled = styled.select`
   border: none;
   outline: none;
   border-radius: 10px;
-
+  padding-left: 20px;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
   > option {
     font-size: 20px;
-    align-items: center;
-    text-align: center;
-    justify-content: center;
   }
 `
 

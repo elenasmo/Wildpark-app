@@ -30,13 +30,13 @@ const MenuStyled = styled.nav`
   top: 35px;
   margin: 10px;
   transition: right 0.3s ease-in-out;
-  z-index: 10;
+  z-index: 100;
 `
 
 const NavLinkStyled = styled(NavLink)`
   font-size: 1.2rem;
   padding: 15px;
-  color: darkgrey;
+  color: #686469;
   text-decoration: none;
   transition: color 0.3s linear;
 `
