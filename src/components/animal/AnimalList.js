@@ -164,6 +164,7 @@ const FlexStyle = styled.div`
   align-items: center;
   align-content: center;
   flex-direction: row;
+  padding: 10px;
 `
 
 const FullViewStyled = styled.div`
@@ -187,7 +188,7 @@ const SelectStyled = styled.select`
   position: relative;
   display: flex;
   height: 33px;
-  background-color: lightgrey;
+  background-color: #dedddc;
   border: none;
   outline: none;
   border-radius: 10px;

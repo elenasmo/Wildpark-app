@@ -22,8 +22,8 @@ const Header = styled.header`
   background: transparent;
   color: #686469;
   font-style: bold;
-  font-size: 30px;
-  padding: 20px;
+  font-size: 32px;
+  padding: 10px;
   /* background-size: cover; */
   /* background-image: url('https://res.cloudinary.com/duwqflakd/image/upload/v1571496352/Pfad_gp8hno.png'); */
 `

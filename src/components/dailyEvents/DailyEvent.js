@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components/macro'
 
 export default function DailyEvent({
@@ -12,6 +12,21 @@ export default function DailyEvent({
   dailyEvent
 }) {
   const [starsSelected, selectStar] = useState(0)
+  const [comment, setComment] = useState('')
+  const [isRatingVisible, setIsRatingVisible] = useState(false)
+  const [average, setAverage] = useState(0)
+
+  useEffect(() => {
+    if (dailyEvent != null) {
+      const n = dailyEvent.rating.length
+      const currentStars = dailyEvent.rating.reduce(
+        (acc, curr) => acc + curr.stars,
+        0
+      )
+      const averageStars = Math.round(currentStars / n)
+      setAverage(averageStars)
+    }
+  }, [dailyEvent])
 
   const Star = ({ active = false, onClick }) => (
     <StarsStyled active={active} onClick={onClick} />
@@ -31,6 +46,7 @@ export default function DailyEvent({
           <Star
             key={i}
             active={isActive(i)}
+            value={starsSelected}
             onClick={() => {
               selectStar(i + 1)
             }}
@@ -49,14 +65,22 @@ export default function DailyEvent({
           <p>{month}</p>
           <p>{times}</p>
           <p>{timesWeekend}</p>
-          {dailyEvent.rating.map((rating, index) => {
-            return (
-              <React.Fragment key={index}>
-                <p>{rating.comment}</p>
-                <StarRating activeStars={rating.stars || 0} />
-              </React.Fragment>
-            )
-          })}
+          <AverageRatingStyled>
+            <StarRating activeStars={average} />
+            <p>{dailyEvent.rating.length} Bewertungen</p>
+          </AverageRatingStyled>
+          <button onClick={toggleRating}>Bewertungen anzeigen</button>
+          <Scroll>
+            {isRatingVisible &&
+              dailyEvent.rating.map((rating, index) => {
+                return (
+                  <CommentStyled key={index}>
+                    <StarRating activeStars={rating.stars || 0} />
+                    <p>{rating.comment}</p>
+                  </CommentStyled>
+                )
+              })}
+          </Scroll>
         </div>
         <FormStyled onSubmit={onHandleSubmit}>
           <label>
@@ -66,6 +90,8 @@ export default function DailyEvent({
               name="comment"
               type="text"
               placeholder="Schreiben Sie hier einen Kommentar!"
+              value={comment}
+              onChange={event => setComment(event.target.value)}
             />
           </label>
           <button>Hinzufügen</button>
@@ -76,16 +102,22 @@ export default function DailyEvent({
 
   function onHandleSubmit(event) {
     event.preventDefault()
-    const form = event.target
-    const formData = new FormData(form)
-    const data = Object.fromEntries(formData)
-    //ändern
-    data.stars = starsSelected
-    console.log(data)
-    onNewComment(dailyEvent, data)
-    form.reset()
+    onNewComment(dailyEvent, { comment: comment, stars: starsSelected })
+    selectStar(0)
+    setComment('')
+  }
+
+  function toggleRating() {
+    setIsRatingVisible(!isRatingVisible)
   }
 }
+
+const Scroll = styled.div`
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: scroll;
+  scroll-snap-type: x mandatory;
+`
 
 const EventStyled = styled.section`
   background: white;
@@ -101,11 +133,49 @@ const EventStyled = styled.section`
   > div > p {
     font-size: 14px;
   }
+  button {
+    background-color: #dedddc;
+    border-radius: 6px;
+    padding: 5px;
+    margin: 10px;
+    border: none;
+  }
 `
 const FormStyled = styled.form`
+  border: 1px solid darkgray;
   display: grid;
   gap: 20px;
   padding: 20px;
+  label {
+    font-size: 16px;
+  }
+  textarea {
+    font-family: Helvetica;
+    height: 50px;
+    width: 200px;
+    border: 1px solid darkgray;
+  }
+`
+const AverageRatingStyled = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  p {
+    font-size: 14px;
+    color: grey;
+  }
+`
+
+const CommentStyled = styled.div`
+  background-color: #f8f8f8;
+  margin: 10px;
+  border-radius: 5px;
+  flex: 1 0 100%;
+
+  scroll-snap-align: start;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `
 
 const RatingStyled = styled.div`
@@ -113,7 +183,10 @@ const RatingStyled = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  padding: 15px;
+  padding: 10px;
+  p {
+    padding: 10px;
+  }
 `
 
 const StarsStyled = styled.div`
