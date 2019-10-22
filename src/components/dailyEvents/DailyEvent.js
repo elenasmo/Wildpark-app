@@ -69,7 +69,7 @@ export default function DailyEvent({
             <StarRating activeStars={average} />
             <p>{dailyEvent.rating.length} Bewertungen</p>
           </AverageRatingStyled>
-          <button onClick={toggleRating}>Bewertungen anzeigen</button>
+          <button onClick={toggleRating}>Alle Bewertungen anzeigen</button>
           <Scroll>
             {isRatingVisible &&
               dailyEvent.rating.map((rating, index) => {
@@ -87,11 +87,14 @@ export default function DailyEvent({
             Hat Ihnen die Vorstellung gefallen?
             <StarRating totalStars={5} />
             <textarea
+              maxLength="200"
+              minLength="1"
               name="comment"
               type="text"
               placeholder="Schreiben Sie hier einen Kommentar!"
               value={comment}
               onChange={event => setComment(event.target.value)}
+              rows="3"
             />
           </label>
           <button>Hinzufügen</button>
@@ -139,20 +142,20 @@ const EventStyled = styled.section`
     padding: 5px;
     margin: 10px;
     border: none;
+    width: 265px;
   }
 `
 const FormStyled = styled.form`
   border: 1px solid darkgray;
   display: grid;
-  gap: 20px;
-  padding: 20px;
+
+  padding: 10px;
   label {
     font-size: 16px;
   }
   textarea {
     font-family: Helvetica;
-    height: 50px;
-    width: 200px;
+    width: 95%;
     border: 1px solid darkgray;
   }
 `
@@ -170,7 +173,7 @@ const CommentStyled = styled.div`
   margin: 10px;
   border-radius: 5px;
   flex: 1 0 100%;
-
+  font-size: 14px;
   scroll-snap-align: start;
 
   display: flex;
