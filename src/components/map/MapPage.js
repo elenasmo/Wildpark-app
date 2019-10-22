@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import ReactMapGl, { Popup, GeolocateControl } from 'react-map-gl'
 import styled from 'styled-components'
 import Page from '../common/Page'
@@ -26,6 +26,10 @@ export default function MapPage({
   const [isHospitalityActive, setIsHospitalityActive] = useState(true)
   const [isWashroomActive, setIsWashroomActive] = useState(true)
   const [isPlaygroundActive, setIsPlaygroundActive] = useState(true)
+
+  useEffect(() => {
+    document.querySelector('#root').scrollTop = 0
+  }, [])
 
   const [viewport, setViewport] = useState({
     latitude: 53.237547,
