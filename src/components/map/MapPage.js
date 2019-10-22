@@ -125,7 +125,7 @@ export default function MapPage({
   )
 
   function renderPopup() {
-    if (isPopupVisible && activeMarker) {
+    if (isPopupVisible && activeMarker && isAnimalActive) {
       return (
         <Popup
           latitude={parseFloat(activeMarker.latitude)}
@@ -166,7 +166,7 @@ const FilterStyled = styled.div`
 
 const MapStyled = styled.div`
   position: relative;
-  height: 100vh;
+  height: 100%;
 `
 const FilterIconStyled = styled.img`
   padding: 10px;
