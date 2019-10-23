@@ -149,7 +149,6 @@ const FormStyled = styled.form`
   border: 1px solid darkgray;
   display: flex;
   flex-direction: column;
-
   padding: 10px;
   label {
     font-size: 16px;

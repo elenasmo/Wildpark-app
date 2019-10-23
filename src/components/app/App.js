@@ -6,7 +6,7 @@ import MapPage from '../map/MapPage'
 import { Burger } from './Burger'
 import { getAnimals } from '../services'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
-import CalendarPage from '../CalendarPage'
+import CalendarPage from '../calendar/CalendarPage'
 
 export default function App() {
   const [open, setOpen] = useState(false)
@@ -43,7 +43,7 @@ export default function App() {
         <Route
           path="/calendar"
           render={() => (
-            <CalendarPage setOpen={setOpen} pageTitle={'Kalender'} />
+            <CalendarPage setOpen={setOpen} pageTitle={'Veranstaltungen'} />
           )}
         />
         <Route

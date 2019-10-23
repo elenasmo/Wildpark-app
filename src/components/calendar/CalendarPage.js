@@ -1,6 +1,6 @@
 import React from 'react'
 import CalendarComponent from './Calendar'
-import Page from './common/Page'
+import Page from '../common/Page'
 
 export default function CalendarPage({ pageTitle, setOpen }) {
   return (

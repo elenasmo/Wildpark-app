@@ -1,23 +1,69 @@
-import React from 'react'
+import React, { useState } from 'react'
 import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
-
 import styled from 'styled-components'
+import { specialEvents } from '../../data/specialEvents'
 
 export default function CalendarComponent() {
+  const [selectedEvent, selectEvent] = useState()
+  const [isEventVisible, setIsEventVisible] = useState(false)
+
   return (
-    <CalendarStyled>
-      <FullCalendar
-        defaultView="dayGridMonth"
-        plugins={[dayGridPlugin]}
-        events={[
-          { title: 'Halloween', date: '2019-10-27' },
-          { title: 'Nikolaus', date: '2019-12-06' }
-        ]}
-      />
-    </CalendarStyled>
+    <>
+      <CalendarStyled>
+        <FullCalendar
+          defaultView="dayGridMonth"
+          plugins={[dayGridPlugin]}
+          events={specialEvents}
+          eventBackgroundColor={'lightgreen'}
+          eventClick={specialEvent => handleEventClick(specialEvent)}
+        />
+      </CalendarStyled>
+      {isEventVisible && (
+        <EventStyled>
+          <h3>{selectedEvent.title}</h3>
+          <p>{selectedEvent.date}</p>
+          <img src={selectedEvent.picture} />
+        </EventStyled>
+      )}
+    </>
   )
+
+  function handleEventClick(specialEvent) {
+    console.log(specialEvent)
+    const currentEventTitle = specialEvent.event.title
+    const selectedEvent = specialEvents.filter(
+      selevent => currentEventTitle === selevent.title
+    )[0]
+    console.log(selectedEvent)
+    selectEvent(selectedEvent)
+
+    setIsEventVisible(true)
+  }
 }
+
+const EventStyled = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 2px 10px 20px #0004;
+  margin: 10px;
+  padding: 10px;
+  h3 {
+    font-size: 24px;
+    color: gray;
+    margin: 10px;
+  }
+  p {
+    font-size: 16px;
+    color: gray;
+    margin: 0;
+  }
+  img {
+    width: 90vw;
+  }
+`
 
 const CalendarStyled = styled.div`
   padding: 10px;

@@ -12,7 +12,7 @@ export default function Navigation({ open, handleClick }) {
         Vorführungen
       </NavLinkStyled>
       <NavLinkStyled to="/calendar" onClick={handleClick}>
-        Kalender
+        Veranstaltungen
       </NavLinkStyled>
       <NavLinkStyled to="/map" onClick={handleClick}>
         Parkplan
