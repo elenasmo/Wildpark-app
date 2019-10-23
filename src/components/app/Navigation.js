@@ -4,12 +4,15 @@ import { NavLink } from 'react-router-dom'
 
 export default function Navigation({ open, handleClick }) {
   return (
-    <MenuStyled className="Navigation" right width={'200px'} open={open}>
+    <MenuStyled className="Navigation" right open={open}>
       <NavLinkStyled exact to="/" onClick={handleClick}>
         Unsere Tiere
       </NavLinkStyled>
       <NavLinkStyled to="/events" onClick={handleClick}>
         Vorführungen
+      </NavLinkStyled>
+      <NavLinkStyled to="/calendar" onClick={handleClick}>
+        Veranstaltungen
       </NavLinkStyled>
       <NavLinkStyled to="/map" onClick={handleClick}>
         Parkplan

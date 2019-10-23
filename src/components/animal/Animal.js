@@ -92,7 +92,7 @@ const AnimalStyled = styled.section`
     padding-left: 10px;
     > div {
       display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
       align-items: center;
     }
   }

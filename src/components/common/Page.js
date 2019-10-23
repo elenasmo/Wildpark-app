@@ -24,6 +24,4 @@ const Header = styled.header`
   font-style: bold;
   font-size: 32px;
   padding: 10px;
-  /* background-size: cover; */
-  /* background-image: url('https://res.cloudinary.com/duwqflakd/image/upload/v1571496352/Pfad_gp8hno.png'); */
 `
