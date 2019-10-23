@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import ReactMapGl, { Popup, GeolocateControl } from 'react-map-gl'
 import styled from 'styled-components'
 import Page from '../common/Page'
@@ -27,19 +27,18 @@ export default function MapPage({
   const [isWashroomActive, setIsWashroomActive] = useState(true)
   const [isPlaygroundActive, setIsPlaygroundActive] = useState(true)
 
-  useEffect(() => {
-    document.querySelector('#root').scrollTop = 0
-  }, [])
-
-  const [viewport, setViewport] = useState({
-    latitude: 53.237547,
-    longitude: 10.042346,
+  const currViewport = {
+    latitude: initAnimal != null ? parseFloat(initAnimal.latitude) : 53.237547,
+    longitude:
+      initAnimal != null ? parseFloat(initAnimal.longitude) : 10.042346,
     width: '100vw',
     height: '100vh',
     zoom: 16,
     maxZoom: 18,
     minZoom: 14
-  })
+  }
+
+  const [viewport, setViewport] = useState(currViewport)
 
   function withMarkers() {
     let list = []
@@ -174,7 +173,8 @@ const MapStyled = styled.div`
 `
 const FilterIconStyled = styled.img`
   padding: 10px;
-  width: 50px;
+  width: 55px;
+  height: 55px;
   margin-top: 10px;
   margin-right: 10px;
   box-shadow: ${props =>

@@ -147,7 +147,8 @@ const EventStyled = styled.section`
 `
 const FormStyled = styled.form`
   border: 1px solid darkgray;
-  display: grid;
+  display: flex;
+  flex-direction: column;
 
   padding: 10px;
   label {

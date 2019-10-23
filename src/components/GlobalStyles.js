@@ -9,6 +9,7 @@ body {
     font-family: Helvetica;
     font-size:  18px; 
     background-color: white;
+    
 }
 `
 export default GlobalStyle

@@ -142,9 +142,6 @@ export default function AnimalList({
 
 const AnimalPage = styled.section`
   padding: 10px;
-  h2 {
-    text-align: center;
-  }
 `
 
 const GridLayoutStyled = styled.div`
@@ -160,11 +157,10 @@ const ColumnStyled = styled.div`
 `
 const FlexStyle = styled.div`
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   align-content: center;
   flex-direction: row;
-  padding: 10px;
 `
 
 const FullViewStyled = styled.div`
