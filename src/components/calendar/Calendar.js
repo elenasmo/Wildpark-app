@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, createRef } from 'react'
 import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import styled from 'styled-components'
 import { specialEvents } from '../../data/specialEvents'
+import deLocale from '@fullcalendar/core/locales/de'
 
 export default function CalendarComponent() {
   const [selectedEvent, selectEvent] = useState()
@@ -14,15 +15,19 @@ export default function CalendarComponent() {
         <FullCalendar
           defaultView="dayGridMonth"
           plugins={[dayGridPlugin]}
+          locale={deLocale}
           events={specialEvents}
           eventBackgroundColor={'lightgreen'}
+          eventBorderColor={'lightgreen'}
           eventClick={specialEvent => handleEventClick(specialEvent)}
         />
       </CalendarStyled>
       {isEventVisible && (
         <EventStyled>
-          <h3>{selectedEvent.title}</h3>
-          <p>{selectedEvent.date}</p>
+          <div>
+            <h3>{selectedEvent.title}</h3>
+            <p>{selectedEvent.date}</p>
+          </div>
           <img src={selectedEvent.picture} />
         </EventStyled>
       )}
@@ -30,7 +35,6 @@ export default function CalendarComponent() {
   )
 
   function handleEventClick(specialEvent) {
-    console.log(specialEvent)
     const currentEventTitle = specialEvent.event.title
     const selectedEvent = specialEvents.filter(
       selevent => currentEventTitle === selevent.title
@@ -44,8 +48,8 @@ export default function CalendarComponent() {
 
 const EventStyled = styled.div`
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  flex-direction: row;
+  justify-content: space-between;
   align-items: center;
   box-shadow: 2px 10px 20px #0004;
   margin: 10px;
@@ -58,10 +62,11 @@ const EventStyled = styled.div`
   p {
     font-size: 16px;
     color: gray;
-    margin: 0;
+    margin: 10px;
   }
   img {
-    width: 90vw;
+    width: 50%;
+    padding: 10px;
   }
 `
 
@@ -271,6 +276,7 @@ const CalendarStyled = styled.div`
 
   .fc td.fc-today {
     border-style: double;
+    content: 'Heute';
     /* overcome neighboring borders */
   }
 
