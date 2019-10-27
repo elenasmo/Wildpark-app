@@ -1,13 +1,13 @@
-import React from 'react'
-import AnimalList from './AnimalList'
+// import React from 'react'
+// import AnimalList from './AnimalList'
 
-export default {
-  title: 'AnimalList',
-  decorators: [Wrapper]
-}
+// export default {
+//   title: 'AnimalList',
+//   decorators: [Wrapper]
+// }
 
-function Wrapper(storyFn) {
-  return <div style={{ width: '400px' }}>{storyFn()}</div>
-}
+// function Wrapper(storyFn) {
+//   return <div style={{ width: '400px' }}>{storyFn()}</div>
+// }
 
-export const list = () => <AnimalList />
+// export const list = () => <AnimalList />

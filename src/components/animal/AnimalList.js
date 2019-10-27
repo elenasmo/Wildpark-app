@@ -46,7 +46,7 @@ export default function AnimalList({
               onChange={handleSortChange}
               placeholder="select"
             >
-              <option>Sortieren</option>
+              <option value="sort">Sortieren</option>
               <option value="title">alphabetisch</option>
               <option value="station">nach Station</option>
               <option value="none">---</option>

@@ -1,5 +1,17 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components/macro'
+//import StarRating from './StarRating'
+
+import PropTypes from 'prop-types'
+
+DailyEvent.propTypes = {
+  title: PropTypes.string,
+  picture: PropTypes.string,
+  information: PropTypes.string,
+  times: PropTypes.string,
+  timesWeekend: PropTypes.string,
+  month: PropTypes.string
+}
 
 export default function DailyEvent({
   title,
@@ -15,6 +27,7 @@ export default function DailyEvent({
   const [comment, setComment] = useState('')
   const [isRatingVisible, setIsRatingVisible] = useState(false)
   const [average, setAverage] = useState(0)
+  const [isError, setIsError] = useState(false)
 
   useEffect(() => {
     if (dailyEvent != null) {
@@ -27,6 +40,10 @@ export default function DailyEvent({
       setAverage(averageStars)
     }
   }, [dailyEvent])
+
+  useEffect(() => {
+    setIsError(false)
+  }, [comment])
 
   const Star = ({ active = false, onClick }) => (
     <StarsStyled active={active} onClick={onClick} />
@@ -97,6 +114,11 @@ export default function DailyEvent({
               rows="3"
             />
           </label>
+          {isError && (
+            <AlertStyled>
+              Gib bitte noch einen kurzen Kommentar ein.
+            </AlertStyled>
+          )}
           <button>Hinzufügen</button>
         </FormStyled>
       </EventStyled>
@@ -105,9 +127,14 @@ export default function DailyEvent({
 
   function onHandleSubmit(event) {
     event.preventDefault()
-    onNewComment(dailyEvent, { comment: comment, stars: starsSelected })
-    selectStar(0)
-    setComment('')
+    if (comment.length <= 2) {
+      setIsError(true)
+    } else {
+      onNewComment(dailyEvent, { comment: comment, stars: starsSelected })
+      selectStar(0)
+      setComment('')
+      setIsError(false)
+    }
   }
 
   function toggleRating() {
@@ -134,7 +161,7 @@ const EventStyled = styled.section`
   flex-direction: column;
   text-align: center;
   > div > p {
-    font-size: 14px;
+    font-size: 16px;
   }
   button {
     background-color: #dedddc;
@@ -143,8 +170,14 @@ const EventStyled = styled.section`
     margin: 10px;
     border: none;
     width: 265px;
+    font-size: 16px;
   }
 `
+const AlertStyled = styled.p`
+  color: red;
+  font-size: 14px;
+`
+
 const FormStyled = styled.form`
   border: 1px solid darkgray;
   display: flex;

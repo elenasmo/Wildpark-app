@@ -1,4 +1,4 @@
-import React, { useState, createRef } from 'react'
+import React, { useState } from 'react'
 import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import styled from 'styled-components'
@@ -28,7 +28,7 @@ export default function CalendarComponent() {
             <h3>{selectedEvent.title}</h3>
             <p>{selectedEvent.date}</p>
           </div>
-          <img src={selectedEvent.picture} />
+          <img src={selectedEvent.picture} alt={selectedEvent.title} />
         </EventStyled>
       )}
     </>
@@ -39,9 +39,7 @@ export default function CalendarComponent() {
     const selectedEvent = specialEvents.filter(
       selevent => currentEventTitle === selevent.title
     )[0]
-    console.log(selectedEvent)
     selectEvent(selectedEvent)
-
     setIsEventVisible(true)
   }
 }
@@ -62,7 +60,7 @@ const EventStyled = styled.div`
   p {
     font-size: 16px;
     color: gray;
-    margin: 10px;
+    margin: 0;
   }
   img {
     width: 50%;
