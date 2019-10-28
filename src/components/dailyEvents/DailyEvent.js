@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components/macro'
-//import StarRating from './StarRating'
+
+import Star from './Star'
 
 import PropTypes from 'prop-types'
 
@@ -16,7 +17,6 @@ DailyEvent.propTypes = {
 export default function DailyEvent({
   title,
   picture,
-  information,
   times,
   timesWeekend,
   month,
@@ -45,34 +45,6 @@ export default function DailyEvent({
     setIsError(false)
   }, [comment])
 
-  const Star = ({ active = false, onClick }) => (
-    <StarsStyled active={active} onClick={onClick} />
-  )
-
-  const StarRating = ({ totalStars = 5, activeStars }) => {
-    const isActive = i => {
-      if (activeStars != null) {
-        return i < activeStars
-      } else {
-        return i < starsSelected
-      }
-    }
-    return (
-      <RatingStyled>
-        {[...Array(totalStars)].map((n, i) => (
-          <Star
-            key={i}
-            active={isActive(i)}
-            value={starsSelected}
-            onClick={() => {
-              selectStar(i + 1)
-            }}
-          />
-        ))}
-      </RatingStyled>
-    )
-  }
-
   return (
     <>
       <EventStyled>
@@ -82,6 +54,7 @@ export default function DailyEvent({
           <p>{month}</p>
           <p>{times}</p>
           <p>{timesWeekend}</p>
+
           <AverageRatingStyled>
             <StarRating activeStars={average} />
             <p>{dailyEvent.rating.length} Bewertungen</p>
@@ -124,6 +97,30 @@ export default function DailyEvent({
       </EventStyled>
     </>
   )
+
+  function StarRating({ totalStars = 5, activeStars }) {
+    const isActive = i => {
+      if (activeStars != null) {
+        return i < activeStars
+      } else {
+        return i < starsSelected
+      }
+    }
+    return (
+      <RatingStyled>
+        {[...Array(totalStars)].map((n, i) => (
+          <Star
+            key={i}
+            active={isActive(i)}
+            value={starsSelected}
+            onClick={() => {
+              selectStar(i + 1)
+            }}
+          />
+        ))}
+      </RatingStyled>
+    )
+  }
 
   function onHandleSubmit(event) {
     event.preventDefault()
@@ -223,35 +220,4 @@ const RatingStyled = styled.div`
   p {
     padding: 10px;
   }
-`
-
-const StarsStyled = styled.div`
-  cursor: pointer;
-  width: 1em;
-  height: 1em;
-  background-color: ${props => (props.active ? 'rgb(255, 180, 0)' : 'grey')};
-  -webkit-clip-path: polygon(
-    50% 0%,
-    63% 38%,
-    100% 38%,
-    69% 59%,
-    82% 100%,
-    50% 75%,
-    18% 100%,
-    31% 59%,
-    0% 38%,
-    37% 38%
-  );
-  clip-path: polygon(
-    50% 0%,
-    63% 38%,
-    100% 38%,
-    69% 59%,
-    82% 100%,
-    50% 75%,
-    18% 100%,
-    31% 59%,
-    0% 38%,
-    37% 38%
-  );
 `

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import DailyEvent from './DailyEvent'
 import Page from '../common/Page'
 import styled from 'styled-components'
+
 import { getEvents, patchEvent } from '../services'
 
 export default function DailyEventsList({ pageTitle, setOpen }) {

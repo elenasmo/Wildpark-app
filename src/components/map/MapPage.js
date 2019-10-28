@@ -12,10 +12,10 @@ const geolocateStyle = {
   margin: '10px',
   padding: '10px'
 }
-const bounds = [[53.235344, 10.039464], [53.240696, 10.052925]]
 
 export default function MapPage({
   animalList,
+  events,
   initAnimal,
   pageTitle,
   setOpen
@@ -26,37 +26,19 @@ export default function MapPage({
   const [isHospitalityActive, setIsHospitalityActive] = useState(true)
   const [isWashroomActive, setIsWashroomActive] = useState(true)
   const [isPlaygroundActive, setIsPlaygroundActive] = useState(true)
-
+  console.log(events)
   const currViewport = {
     latitude: initAnimal != null ? parseFloat(initAnimal.latitude) : 53.237547,
     longitude:
       initAnimal != null ? parseFloat(initAnimal.longitude) : 10.042346,
     width: '100vw',
-    height: '100vh',
+    height: '100%',
     zoom: 16,
     maxZoom: 18,
     minZoom: 14
   }
 
   const [viewport, setViewport] = useState(currViewport)
-
-  function withMarkers() {
-    let list = []
-    if (isAnimalActive) {
-      list = [...list, ...animalList]
-    }
-    if (isHospitalityActive) {
-      list = [...list, ...hospitalityList]
-    }
-    if (isWashroomActive) {
-      list = [...list, ...wcList]
-    }
-    if (isPlaygroundActive) {
-      list = [...list, ...playgroundList]
-    }
-
-    return <RenderMarkers list={list} onClick={handlePopup} />
-  }
 
   return (
     <>
@@ -67,7 +49,6 @@ export default function MapPage({
             {...viewport}
             mapboxApiAccessToken={token}
             mapStyle="mapbox://styles/qesmo/ck1ywet8u23o61co9xbxqr6z2"
-            maxBounds={bounds}
             onViewportChange={viewport => setViewport(viewport)}
           >
             <GeolocateControl
@@ -128,7 +109,7 @@ export default function MapPage({
   )
 
   function renderPopup() {
-    if (isPopupVisible && activeMarker && isAnimalActive) {
+    if (isPopupVisible && activeMarker) {
       return (
         <Popup
           latitude={parseFloat(activeMarker.latitude)}
@@ -138,7 +119,10 @@ export default function MapPage({
           }}
           onClick={togglePopup}
         >
-          <div>{activeMarker.title}</div>
+          <PopupStyled>
+            <div>{activeMarker.title} </div>
+            {showStation()}
+          </PopupStyled>
         </Popup>
       )
     }
@@ -152,6 +136,28 @@ export default function MapPage({
 
   function togglePopup() {
     setIsPopupVisible(!isPopupVisible)
+  }
+  function withMarkers() {
+    let list = []
+    if (isAnimalActive) {
+      list = [...list, ...animalList]
+    }
+    if (isHospitalityActive) {
+      list = [...list, ...hospitalityList]
+    }
+    if (isWashroomActive) {
+      list = [...list, ...wcList]
+    }
+    if (isPlaygroundActive) {
+      list = [...list, ...playgroundList]
+    }
+
+    return <RenderMarkers list={list} onClick={handlePopup} />
+  }
+  function showStation() {
+    if (activeMarker.station != null) {
+      return <StationStyled>{activeMarker.station}</StationStyled>
+    }
   }
 }
 
@@ -182,4 +188,21 @@ const FilterIconStyled = styled.img`
   border-radius: 4px;
   border: 1px solid darkgray;
   background: white;
+`
+
+const StationStyled = styled.div`
+  border-radius: 50%;
+  border: 3px solid #8b488c;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
+  width: 30px;
+`
+const PopupStyled = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0;
+  padding: 0;
 `

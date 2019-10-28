@@ -5,6 +5,14 @@ import styled from 'styled-components'
 import { specialEvents } from '../../data/specialEvents'
 import deLocale from '@fullcalendar/core/locales/de'
 
+import PropTypes from 'prop-types'
+
+CalendarComponent.propTypes = {
+  title: PropTypes.string,
+  picture: PropTypes.string,
+  date: PropTypes.string
+}
+
 export default function CalendarComponent() {
   const [selectedEvent, selectEvent] = useState()
   const [isEventVisible, setIsEventVisible] = useState(false)

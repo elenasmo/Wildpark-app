@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import styled from 'styled-components/macro'
 import AnimalList from '../animal/AnimalList'
 import DailyEventsList from '../dailyEvents/DailyEventsList'
 import Navigation from './Navigation'
@@ -43,7 +44,7 @@ export default function App() {
         <Route
           path="/calendar"
           render={() => (
-            <CalendarPage setOpen={setOpen} pageTitle={'Veranstaltungen'} />
+            <CalendarPage setOpen={setOpen} pageTitle={'Kalender'} />
           )}
         />
         <Route
