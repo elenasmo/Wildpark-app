@@ -1,68 +1,75 @@
+# App for Visitors (Wildpark)
+
+As my final project for the Web-Development-Bootcamp headed by neue fische GmbH I decided to develop an app for Visitors of the Wildpark. The main feature is a map, which shows the visitors their current location and where they can find the animals, restaurants, playgrounds and restrooms.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Preview
 
-In the project directory, you can run:
+<img src="https://res.cloudinary.com/duwqflakd/image/upload/v1572261807/localhost_3000_calendar_iPhone_6_7_8_1_o8lmk4.png" alt="drawing" width="200"/>
+<img src="https://res.cloudinary.com/duwqflakd/image/upload/v1572261807/localhost_3000_calendar_iPhone_6_7_8_2_mtlyfd.png" alt="drawing" width="200"/>
+<img src="https://res.cloudinary.com/duwqflakd/image/upload/v1572261806/localhost_3000_calendar_iPhone_6_7_8_3_no5nug.png" alt="drawing" width="200"/>
 
-### `npm start`
+## Tech stack
+
+- React.js
+- Node.js
+- MongoDB (localhost:27017)
+- Express
+- react-router
+- mongoose
+- nodemon
+- REST API
+- styled-components
+- styled-icons
+- Mapbox-API
+- fullcalendar
+
+## Run on localhost
+
+### Setup
+
+`git clone git@github.com:elenasmo/wildpark-app.git`
+
+`cd wildpark-app`
+
+`npm install`
+
+### Requirements
+
+- Cloudinary account
+- Mapbox account
+
+### Cloudinary
+
+- Create an account on https://cloudinary.com/.
+- Go to https://cloudinary.com/console/settings/upload#upload_presets
+- Click `Enable unsigned uploading`
+- Copy the preset name (the 8 character hash below name)
+- Create a .env.local file in the root directory of this project and add your cloudname and preset:
+
+```
+  REACT_APP_CLOUDINARY_CLOUDNAME='your_cloudname'
+  REACT_APP_CLOUDINARY_PRESET='your_preset'
+```
+
+### Mapbox
+
+- Create an account on https://account.mapbox.com/auth/signup/
+
+- Create a token or choose the default token
+- Add the token to your .env.local file:
+
+```
+  REACT_APP_MAPBOX_TOKEN="your_token"
+```
+
+## Run the app
+
+`npm start`
 
 Runs the app in the development mode.<br>
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits.<br>
 You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
