@@ -15,7 +15,6 @@ const geolocateStyle = {
 
 export default function MapPage({
   animalList,
-  events,
   initAnimal,
   pageTitle,
   setOpen
@@ -26,7 +25,7 @@ export default function MapPage({
   const [isHospitalityActive, setIsHospitalityActive] = useState(true)
   const [isWashroomActive, setIsWashroomActive] = useState(true)
   const [isPlaygroundActive, setIsPlaygroundActive] = useState(true)
-  console.log(events)
+
   const currViewport = {
     latitude: initAnimal != null ? parseFloat(initAnimal.latitude) : 53.237547,
     longitude:
@@ -205,4 +204,7 @@ const PopupStyled = styled.div`
   align-items: center;
   margin: 0;
   padding: 0;
+  div {
+    margin-right: 4px;
+  }
 `

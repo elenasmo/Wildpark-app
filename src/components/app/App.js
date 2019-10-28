@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import styled from 'styled-components/macro'
+
 import AnimalList from '../animal/AnimalList'
 import DailyEventsList from '../dailyEvents/DailyEventsList'
 import Navigation from './Navigation'
