@@ -6,9 +6,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Preview
 
-<img src="https://res.cloudinary.com/duwqflakd/image/upload/v1572261807/localhost_3000_calendar_iPhone_6_7_8_1_o8lmk4.png" alt="drawing" width="200"/>
-<img src="https://res.cloudinary.com/duwqflakd/image/upload/v1572261807/localhost_3000_calendar_iPhone_6_7_8_2_mtlyfd.png" alt="drawing" width="200"/>
-<img src="https://res.cloudinary.com/duwqflakd/image/upload/v1572261806/localhost_3000_calendar_iPhone_6_7_8_3_no5nug.png" alt="drawing" width="200"/>
+<img src="https://res.cloudinary.com/duwqflakd/image/upload/v1572261807/localhost_3000_calendar_iPhone_6_7_8_1_o8lmk4.png" alt="drawing" width="200"/> <img src="https://res.cloudinary.com/duwqflakd/image/upload/v1572261807/localhost_3000_calendar_iPhone_6_7_8_2_mtlyfd.png" alt="drawing" width="200"/> <img src="https://res.cloudinary.com/duwqflakd/image/upload/v1572261806/localhost_3000_calendar_iPhone_6_7_8_3_no5nug.png" alt="drawing" width="200"/>
 
 ## Tech stack
 
