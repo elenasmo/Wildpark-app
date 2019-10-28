@@ -12,8 +12,8 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 - React.js
 - Node.js
-- MongoDB (localhost:27017)
-- Express
+- MongoDB 
+- express
 - react-router
 - mongoose
 - nodemon
