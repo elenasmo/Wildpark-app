@@ -11,9 +11,18 @@ export default function Page({ pageTitle, children, setOpen }) {
 }
 
 const PageStyled = styled.section`
-  margin: 0;
+  max-width: 400px;
+  @media (min-width: 768px) {
+    max-width: 500px;
+  }
+  height: 100%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-rows: 52px auto;
 `
-const MainStyled = styled.div``
+const MainStyled = styled.div`
+  overflow-y: scroll;
+`
 
 const Header = styled.header`
   display: flex;

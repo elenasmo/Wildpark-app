@@ -12,7 +12,7 @@ export default function Navigation({ open, handleClick }) {
         Vorführungen
       </NavLinkStyled>
       <NavLinkStyled to="/calendar" onClick={handleClick}>
-        Veranstaltungen
+        Kalender
       </NavLinkStyled>
       <NavLinkStyled to="/map" onClick={handleClick}>
         Parkplan
@@ -25,7 +25,7 @@ const MenuStyled = styled.nav`
   display: flex;
   flex-direction: column;
   background: white;
-  right: ${({ open }) => (open ? 0 : '-300px')};
+  right: ${({ open }) => (open ? '-10px' : '-300px')};
   height: 100vh;
   text-align: left;
   padding: 10px;

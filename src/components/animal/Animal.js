@@ -32,10 +32,6 @@ export default function Animal({
   const [isInformationVisible, setIsInformationVisible] = useState(false)
   const [isArrowActive, setIsArrowActive] = useState(true)
 
-  function toggleInformation() {
-    setIsInformationVisible(!isInformationVisible)
-    setIsArrowActive(!isArrowActive)
-  }
   if (information == null) {
     return (
       <AnimalStyled>
@@ -60,6 +56,7 @@ export default function Animal({
             >
               <PlaceStyled />
             </Link>
+            <StationStyled>{station}</StationStyled>
           </div>
         </section>
         <ArrowButton onClick={toggleInformation}>
@@ -68,6 +65,10 @@ export default function Animal({
         {isInformationVisible && <Information text={information} />}
       </AnimalStyled>
     )
+  }
+  function toggleInformation() {
+    setIsInformationVisible(!isInformationVisible)
+    setIsArrowActive(!isArrowActive)
   }
   function toggleLikeButton(event) {
     event.stopPropagation()
@@ -92,13 +93,24 @@ const AnimalStyled = styled.section`
     padding-left: 10px;
     > div {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr;
       align-items: center;
     }
   }
   p {
     padding: 10px;
   }
+`
+
+const StationStyled = styled.div`
+  color: #8b488c;
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+  border: 3px solid #8b488c;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `
 
 const TitleStyled = styled.p`
@@ -131,14 +143,16 @@ const ButtonStyled = styled.button`
 `
 
 const HeartStyled = styled(HeartOutline)`
-  height: 40px;
+  height: 42px;
   color: #8b488c;
   outline: none;
+  padding: 0;
 `
 
 const HeartFilledStyled = styled(HeartFullOutline)`
-  height: 40px;
+  height: 42px;
   color: #8b488c;
+  padding: 0;
 `
 
 const PlaceStyled = styled(Place)`

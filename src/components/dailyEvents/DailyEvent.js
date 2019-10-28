@@ -1,10 +1,22 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components/macro'
 
+import Star from './Star'
+
+import PropTypes from 'prop-types'
+
+DailyEvent.propTypes = {
+  title: PropTypes.string,
+  picture: PropTypes.string,
+  information: PropTypes.string,
+  times: PropTypes.string,
+  timesWeekend: PropTypes.string,
+  month: PropTypes.string
+}
+
 export default function DailyEvent({
   title,
   picture,
-  information,
   times,
   timesWeekend,
   month,
@@ -15,6 +27,7 @@ export default function DailyEvent({
   const [comment, setComment] = useState('')
   const [isRatingVisible, setIsRatingVisible] = useState(false)
   const [average, setAverage] = useState(0)
+  const [isError, setIsError] = useState(false)
 
   useEffect(() => {
     if (dailyEvent != null) {
@@ -28,33 +41,9 @@ export default function DailyEvent({
     }
   }, [dailyEvent])
 
-  const Star = ({ active = false, onClick }) => (
-    <StarsStyled active={active} onClick={onClick} />
-  )
-
-  const StarRating = ({ totalStars = 5, activeStars }) => {
-    const isActive = i => {
-      if (activeStars != null) {
-        return i < activeStars
-      } else {
-        return i < starsSelected
-      }
-    }
-    return (
-      <RatingStyled>
-        {[...Array(totalStars)].map((n, i) => (
-          <Star
-            key={i}
-            active={isActive(i)}
-            value={starsSelected}
-            onClick={() => {
-              selectStar(i + 1)
-            }}
-          />
-        ))}
-      </RatingStyled>
-    )
-  }
+  useEffect(() => {
+    setIsError(false)
+  }, [comment])
 
   return (
     <>
@@ -65,6 +54,7 @@ export default function DailyEvent({
           <p>{month}</p>
           <p>{times}</p>
           <p>{timesWeekend}</p>
+
           <AverageRatingStyled>
             <StarRating activeStars={average} />
             <p>{dailyEvent.rating.length} Bewertungen</p>
@@ -97,17 +87,51 @@ export default function DailyEvent({
               rows="3"
             />
           </label>
+          {isError && (
+            <AlertStyled>
+              Gib bitte noch einen kurzen Kommentar ein.
+            </AlertStyled>
+          )}
           <button>Hinzufügen</button>
         </FormStyled>
       </EventStyled>
     </>
   )
 
+  function StarRating({ totalStars = 5, activeStars }) {
+    const isActive = i => {
+      if (activeStars != null) {
+        return i < activeStars
+      } else {
+        return i < starsSelected
+      }
+    }
+    return (
+      <RatingStyled>
+        {[...Array(totalStars)].map((n, i) => (
+          <Star
+            key={i}
+            active={isActive(i)}
+            value={starsSelected}
+            onClick={() => {
+              selectStar(i + 1)
+            }}
+          />
+        ))}
+      </RatingStyled>
+    )
+  }
+
   function onHandleSubmit(event) {
     event.preventDefault()
-    onNewComment(dailyEvent, { comment: comment, stars: starsSelected })
-    selectStar(0)
-    setComment('')
+    if (comment.length <= 2) {
+      setIsError(true)
+    } else {
+      onNewComment(dailyEvent, { comment: comment, stars: starsSelected })
+      selectStar(0)
+      setComment('')
+      setIsError(false)
+    }
   }
 
   function toggleRating() {
@@ -134,7 +158,7 @@ const EventStyled = styled.section`
   flex-direction: column;
   text-align: center;
   > div > p {
-    font-size: 14px;
+    font-size: 16px;
   }
   button {
     background-color: #dedddc;
@@ -143,8 +167,14 @@ const EventStyled = styled.section`
     margin: 10px;
     border: none;
     width: 265px;
+    font-size: 16px;
   }
 `
+const AlertStyled = styled.p`
+  color: red;
+  font-size: 14px;
+`
+
 const FormStyled = styled.form`
   border: 1px solid darkgray;
   display: flex;
@@ -190,35 +220,4 @@ const RatingStyled = styled.div`
   p {
     padding: 10px;
   }
-`
-
-const StarsStyled = styled.div`
-  cursor: pointer;
-  width: 1em;
-  height: 1em;
-  background-color: ${props => (props.active ? 'rgb(255, 180, 0)' : 'grey')};
-  -webkit-clip-path: polygon(
-    50% 0%,
-    63% 38%,
-    100% 38%,
-    69% 59%,
-    82% 100%,
-    50% 75%,
-    18% 100%,
-    31% 59%,
-    0% 38%,
-    37% 38%
-  );
-  clip-path: polygon(
-    50% 0%,
-    63% 38%,
-    100% 38%,
-    69% 59%,
-    82% 100%,
-    50% 75%,
-    18% 100%,
-    31% 59%,
-    0% 38%,
-    37% 38%
-  );
 `

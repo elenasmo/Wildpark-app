@@ -1,5 +1,6 @@
 export function getAnimalsFilterAndSorted(animalList, sortBy, filter) {
   let newAnimalList = animalList.slice()
+
   if (filter === 'liked') {
     newAnimalList = newAnimalList.filter(animal => animal.isLiked === true)
   }

@@ -20,17 +20,15 @@ export default function AnimalList({
     <Page pageTitle={pageTitle} setOpen={setOpen}>
       <AnimalPage>
         <FlexStyle>
-          <SelectGroup>
-            <SelectStyled
-              name="filter"
-              onChange={handleFilterChange}
-              placeholder="select"
-            >
-              <option>Filtern</option>
-              <option value="all">alle Tiere</option>
-              <option value="liked">Lieblingstiere</option>
-            </SelectStyled>
-          </SelectGroup>
+          <SelectStyled
+            name="filter"
+            onChange={handleFilterChange}
+            placeholder="select"
+          >
+            <option>Filtern</option>
+            <option value="all">alle Tiere</option>
+            <option value="liked">Lieblingstiere</option>
+          </SelectStyled>
           <div>
             <ToggleButtonLeft gridView={gridView}>
               <ViewListStyled onClick={showFullWidth} />
@@ -40,18 +38,16 @@ export default function AnimalList({
             </ToggleButtonRight>
           </div>
 
-          <div>
-            <SelectStyled
-              name="sort"
-              onChange={handleSortChange}
-              placeholder="select"
-            >
-              <option>Sortieren</option>
-              <option value="title">alphabetisch</option>
-              <option value="station">nach Station</option>
-              <option value="none">---</option>
-            </SelectStyled>
-          </div>
+          <SelectStyled
+            name="sort"
+            onChange={handleSortChange}
+            placeholder="select"
+          >
+            <option value="sort">Sortieren</option>
+            <option value="title">alphabetisch</option>
+            <option value="station">nach Station</option>
+            <option value="none">---</option>
+          </SelectStyled>
         </FlexStyle>
 
         {renderArrangement()}
@@ -178,7 +174,6 @@ const ViewListStyled = styled(ViewList)`
   height: 31px;
   color: grey;
 `
-const SelectGroup = styled.div``
 
 const SelectStyled = styled.select`
   position: relative;
@@ -192,6 +187,7 @@ const SelectStyled = styled.select`
   align-items: center;
   text-align: center;
   justify-content: center;
+  width: 120px;
   > option {
     font-size: 20px;
   }
