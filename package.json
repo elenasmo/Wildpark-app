@@ -13,7 +13,7 @@
     "@fullcalendar/react": "^4.3.0",
     "cors": "2.8.5",
     "express": "4.17.1",
-    "highlight.js": "9.15.10",
+    "highlight.js": "10.1.2",
     "markdown-it": "10.0.0",
     "mongoose": "5.7.1",
     "nodemon": "1.19.2",
