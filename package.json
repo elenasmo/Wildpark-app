@@ -12,7 +12,7 @@
     "@fullcalendar/daygrid": "^4.3.0",
     "@fullcalendar/react": "^4.3.0",
     "cors": "2.8.5",
-    "express": "4.17.1",
+    "express": "4.17.3",
     "highlight.js": "9.15.10",
     "markdown-it": "10.0.0",
     "mongoose": "5.7.1",
